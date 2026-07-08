@@ -15,6 +15,7 @@ Imports:
     bslib,
     htmltools,
     sass,
-    shiny
+    shiny,
+    bsicons
 Suggests: 
     testthat (>= 3.0.0)
