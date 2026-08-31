@@ -1,292 +1,305 @@
-#' Cria um layout padronizado para dashboards Shiny
+#' Cria uma barra de navegação reutilizável para dashboards Shiny
 #'
-#' Esta função recebe um título e uma lista de telas para montar um
-#' dashboard com menu navegável, visual reutilizável e conteúdo configurável.
+#' A função monta uma página com navegação superior usando bslib. O formato
+#' recomendado para `menu_items` é uma lista nomeada de listas com `label` e
+#' `ui`, podendo incluir `value`, `icon` e `items` para grupos de navegação.
 #'
-#' @param title Texto exibido como título do dashboard.
-#' @param menu_items Lista com as telas do dashboard. Cada item pode ser
-#'   um objeto de UI do Shiny ou uma lista com os elementos `label` e `ui`.
-#' @param theme Tema do bslib para personalizar cores e estilo.
-#' @param include_css Lógico indicando se deve incluir o estilo padrão do pacote.
+#' @param title Título exibido na marca da barra de navegação.
+#' @param menu_items Lista nomeada de itens ou grupos de navegação.
+#' @param theme Tema bslib usado pela página.
+#' @param selected Valor do painel selecionado inicialmente.
+#' @param id Identificador da navegação para controle programático.
+#' @param brand Conteúdo opcional exibido antes do título, como uma tag de
+#'   imagem ou logotipo.
+#' @param right_items Lista opcional de tags exibidas à direita do menu.
+#' @param include_css Lógico que indica se a dependência visual do pacote deve
+#'   ser anexada ao componente.
+#' @param icons Formato legado: vetor de nomes de ícones usado com `pags`.
+#' @param pags Formato legado: vetor de conteúdos usado com `menu_items` e
+#'   `icons`.
 #' @param ... Argumentos adicionais enviados para [bslib::page_navbar()].
 #'
-#' @return Um objeto de interface do Shiny com o layout padronizado.
+#' @return Um objeto de interface do Shiny.
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #' menu_items <- list(
-#'   "visao_geral" = list(
-#'     label = "Visão Geral",
-#'     ui = shiny::fluidPage(
-#'       shiny::h2("Visão Geral"),
-#'       shiny::p("Conteúdo da primeira tela")
-#'     )
+#'   visao_geral = list(
+#'     label = "Visão geral",
+#'     icon = "speedometer2",
+#'     ui = shiny::h2("Visão geral")
 #'   ),
-#'   "vendas" = list(
-#'     label = "Vendas",
-#'     ui = shiny::fluidPage(
-#'       shiny::h2("Vendas"),
-#'       shiny::p("Conteúdo da segunda tela")
-#'     )
+#'   relatorios = list(
+#'     label = "Relatórios",
+#'     icon = "bar-chart",
+#'     ui = shiny::h2("Relatórios")
 #'   )
 #' )
 #'
-#' ui <- navbar(
-#'   title = "Meu Dashboard",
+#' ShinyDesginerPadrao::navbar(
+#'   title = "Meu dashboard",
 #'   menu_items = menu_items
 #' )
 #' }
+navbar <- function(
+    title,
+    menu_items,
+    theme = bslib::bs_theme(version = 5),
+    selected = NULL,
+    id = NULL,
+    brand = NULL,
+    right_items = NULL,
+    include_css = TRUE,
+    icons = NULL,
+    pags = NULL,
+    ...) {
+  if (!is.null(pags)) {
+    menu_items <- legacy_menu_items(menu_items, icons, pags)
+  } else if (!is.null(icons)) {
+    stop("`icons` precisa ser usado junto com `pags`.", call. = FALSE)
+  }
 
+  normalized_menu <- normalize_menu_items(menu_items)
+  nav_items <- unname(lapply(normalized_menu, build_nav_item))
+
+  title_content <- shiny::tags$span(
+    class = "sdp-navbar__brand",
+    if (!is.null(brand)) {
+      shiny::tags$span(class = "sdp-navbar__brand-mark", brand)
+    },
+    shiny::tags$span(class = "sdp-navbar__title", title)
+  )
+
+  page_args <- list(
+    title = title_content,
+    id = id,
+    selected = selected,
+    theme = theme,
+    navbar_options = list(attribs = list(class = "sdp-navbar"))
+  )
+
+  if (length(right_items) > 0) {
+    page_args <- c(
+      page_args,
+      list(bslib::nav_spacer()),
+      unname(lapply(as_nav_list(right_items), bslib::nav_item))
+    )
+  }
+
+  page <- do.call(
+    bslib::page_navbar,
+    c(page_args, nav_items, list(...))
+  )
+
+  if (isTRUE(include_css)) {
+    page <- htmltools::attachDependencies(
+      page,
+      sdp_html_dependency(),
+      append = TRUE
+    )
+  }
+
+  page
+}
+
+legacy_menu_items <- function(menu_items, icons, pags) {
+  if (length(menu_items) != length(pags)) {
+    stop("`menu_items` e `pags` precisam ter o mesmo tamanho.", call. = FALSE)
+  }
+
+  if (!is.null(icons) && length(icons) != length(menu_items)) {
+    stop("`icons` e `menu_items` precisam ter o mesmo tamanho.", call. = FALSE)
+  }
+
+  item_names <- names(menu_items)
+  if (is.null(item_names) || any(!nzchar(item_names))) {
+    item_names <- paste0("item_", seq_along(menu_items))
+  }
+
+  items <- vector("list", length(menu_items))
+  for (index in seq_along(menu_items)) {
+    items[[index]] <- list(
+      label = as.character(menu_items[[index]]),
+      value = item_names[[index]],
+      icon = if (is.null(icons)) NULL else icons[[index]],
+      ui = pags[[index]]
+    )
+  }
+
+  names(items) <- item_names
+  items
+}
+
+normalize_menu_items <- function(menu_items, path = "item") {
+  if (is.null(menu_items)) {
+    return(list())
+  }
+
+  if (!is.list(menu_items) || inherits(menu_items, "shiny.tag")) {
+    stop("`menu_items` precisa ser uma lista.", call. = FALSE)
+  }
+
+  item_names <- names(menu_items)
+  if (is.null(item_names)) {
+    item_names <- paste0(path, "_", seq_along(menu_items))
+  }
+  item_names[!nzchar(item_names)] <- paste0(
+    path,
+    "_",
+    which(!nzchar(item_names))
+  )
+
+  normalized <- lapply(seq_along(menu_items), function(index) {
+    normalize_menu_item(menu_items[[index]], item_names[[index]])
+  })
+
+  names(normalized) <- item_names
+
+  values <- vapply(normalized, function(item) item$value, character(1))
+  if (anyDuplicated(values)) {
+    stop("Os valores dos itens de navegação precisam ser únicos.", call. = FALSE)
+  }
+
+  normalized
+}
+
+normalize_menu_item <- function(item, item_name) {
+  is_specification <- is.list(item) &&
+    !inherits(item, c("shiny.tag", "shiny.tag.list")) &&
+    any(names(item) %in% c("label", "value", "icon", "ui", "content", "items"))
+
+  if (!is_specification) {
+    return(list(
+      label = item_name,
+      value = item_name,
+      icon = NULL,
+      ui = item,
+      items = NULL
+    ))
+  }
+
+  label <- item$label
+  if (is.null(label)) {
+    label <- item_name
+  }
+
+  value <- item$value
+  if (is.null(value)) {
+    value <- item_name
+  }
+  if (!is.character(value) || length(value) != 1L || !nzchar(value)) {
+    stop("Cada item precisa de um `value` textual não vazio.", call. = FALSE)
+  }
+
+  children <- item$items
+  if (!is.null(children)) {
+    children <- normalize_menu_items(children, path = value)
+    if (!length(children)) {
+      stop("Um grupo de navegação precisa ter pelo menos um item.", call. = FALSE)
+    }
+  }
+
+  content <- item$ui
+  if (is.null(content) && !is.null(item$content)) {
+    content <- item$content
+  }
+
+  list(
+    label = label,
+    value = value,
+    icon = item$icon,
+    ui = content,
+    items = children
+  )
+}
+
+build_nav_item <- function(item) {
+  if (!is.null(item$items)) {
+    children <- unname(lapply(item$items, build_nav_item))
+    return(do.call(
+      bslib::nav_menu,
+      c(
+        list(
+          title = nav_item_title(item$label),
+          value = item$value,
+          icon = nav_item_icon(item$icon, item$label)
+        ),
+        children
+      )
+    ))
+  }
+
+  arguments <- list(
+    title = nav_item_title(item$label),
+    value = item$value,
+    icon = nav_item_icon(item$icon, item$label)
+  )
+
+  if (!is.null(item$ui)) {
+    arguments <- c(arguments, list(item$ui))
+  }
+
+  do.call(bslib::nav_panel, arguments)
+}
+
+nav_item_title <- function(label) {
+  shiny::tags$span(
+    class = "sdp-navbar__item",
+    shiny::tags$span(class = "sdp-navbar__item-label", label)
+  )
+}
+
+nav_item_icon <- function(icon, label) {
+  if (is.null(icon)) {
+    return(NULL)
+  }
+
+  if (is.character(icon)) {
+    if (length(icon) != 1L || !nzchar(icon)) {
+      stop("`icon` precisa ser um nome textual não vazio.", call. = FALSE)
+    }
+    return(bsicons::bs_icon(icon))
+  }
+
+  icon
+}
+
+as_nav_list <- function(items) {
+  if (inherits(items, c("shiny.tag", "shiny.tag.list"))) {
+    return(list(items))
+  }
+  if (!is.list(items)) {
+    return(list(items))
+  }
+  items
+}
+
+sdp_html_dependency <- function() {
+  www_path <- system.file("www", package = "ShinyDesginerPadrao")
+  if (!nzchar(www_path)) {
+    stop("Os assets do pacote não foram encontrados.", call. = FALSE)
+  }
+
+  package_version <- tryCatch(
+    as.character(utils::packageVersion("ShinyDesginerPadrao")),
+    error = function(error) "0.0.0.9000"
+  )
+
+  htmltools::htmlDependency(
+    name = "shiny-designer-padrao",
+    version = package_version,
+    src = www_path,
+    stylesheet = "css/shiny-designer-padrao.css",
+    package = "ShinyDesginerPadrao"
+  )
+}
+
+#' @export
+#' @noRd
 .onLoad <- function(libname, pkgname) {
   shiny::addResourcePath(
     prefix = "ShinyDesginerPadrao-www",
     directoryPath = system.file("www", package = pkgname)
-  )
-}
-
-css_navbar <- "
-  .navbar {
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    background: linear-gradient(90deg, #07121f 0%, #12233b 55%, #193b5b 100%) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.16) !important;
-    box-shadow: 0 10px 30px rgba(2, 8, 23, 0.25);
-    padding: 0.55rem 1rem;
-    min-height: 3.4rem;
-  }
-"
-
-css_navbar_brand_custom <- paste0(c(
-  "display: flex;",
-  "align-items: center;",
-  "gap: 0.75rem;",
-  "flex-shrink: 0;"
-))
-
-css_navbar_brand <- paste0(c(
-  "width: 42px !important;",
-  "height: 42px !important;",
-  "border-radius: 50% !important;",
-  "object-fit: cover !important;",
-  "border: 2px solid rgba(255, 255, 255, 0.8);",
-  "color: #f8fafc !important;",
-  "font-weight: 700;",
-  "letter-spacing: 0.02em;",
-  "display: inline-flex;",
-  "align-items: center;",
-  "margin-right: 0;"
-
-))
-
-# .navbar-brand-name {
-#   color: #f8fafc;
-#   font-size: 1rem;
-#   font-weight: 700;
-#   white-space: nowrap;
-# }
-
-css_navbar_nav <- paste0(c(
-  "display: flex;",
-  "align-items: center;",
-  "gap: 0.25rem;",
-  "flex-wrap: nowrap;",
-  "margin-left: 0.2rem;"
-))
-
-# .nav-link {
-#   color: rgba(248, 250, 252, 0.8) !important;
-# }
-
-# .nav-link i {
-#   margin-right: 8px;
-# }
-
-css_nav_menu_item <- paste0(c(
-  "display: inline-flex;",
-  "align-items: center;",
-  "gap: 0.5rem;",
-  "white-space: nowrap;"
-))
-
-css_nav_menu_item_highlight <- paste0(c(
-  "position: relative;",
-  "color: #e8f9ff;",
-  "font-weight: 700;"
-))
-
-css_nav_menu_item_label <- paste0(c(
-  "color: #e8f9ff;",
-  "font-weight: 700;"
-))
-
-css_body <- "
-  body {
-    background: linear-gradient(135deg, #07121f 0%, #0f172a 42%, #162d45 100%);,
-    color: #f8fafc;,
-    font-family: 'Inter', sans-serif;,
-    overflow-x: hidden;
-  }
-"
-
-css_pagina <- "
-
-/* Estilos globais compartilhados */
-
-.navbar {
-  position: sticky;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  background: linear-gradient(90deg, #07121f 0%, #12233b 55%, #193b5b 100%) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.16) !important;
-  box-shadow: 0 10px 30px rgba(2, 8, 23, 0.25);
-  padding: 0.55rem 1rem;
-  min-height: 3.4rem;
-}
-
-.navbar-brand-custom {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  flex-shrink: 0;
-  margin-right: 1rem;
-}
-
-.navbar-brand .nav-bar-foto-perfil {
-  width: 42px !important;
-  height: 42px !important;
-  border-radius: 50% !important;
-  object-fit: cover !important;
-  border: 2px solid rgba(255, 255, 255, 0.8);
-}
-
-.navbar-brand {
-  color: #f8fafc !important;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  display: inline-flex;
-  align-items: center;
-}
-
-.navbar-brand-name {
-  color: #f8fafc;
-  font-size: 1rem;
-  font-weight: 700;
-  white-space: nowrap;
-}
-
-.navbar-nav {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  flex-wrap: nowrap;
-  margin-left: 0.2rem;
-}
-
-.nav-link {
-  color: rgba(248, 250, 252, 0.8) !important;
-}
-
-.nav-link i {
-  margin-right: 8px;
-}
-
-.nav-menu-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  white-space: nowrap;
-}
-
-.nav-menu-item--highlight {
-  position: relative;
-}
-
-.nav-menu-item--highlight .nav-menu-item-label {
-  color: #e8f9ff;
-  font-weight: 700;
-}
-
-body {
-  background:
-    linear-gradient(135deg, #07121f 0%, #0f172a 42%, #162d45 100%);
-  color: #f8fafc;
-  font-family: 'Inter', sans-serif;
-  overflow-x: hidden;
-}
-
-"
-#' @export 
-navbar <- function(
-    title,
-    menu_items,
-    icons,
-    pags,
-    theme = bslib::bs_theme(version = 5),
-    include_css = TRUE,
-    ...) {
-
-  args_nav_bar <- list(
-    title = shiny::tags$span(
-      style = css_navbar_brand_custom,
-      shiny::tags$img(
-        src = "ShinyDesginerPadrao-www/png/foto-perfil-nav-bar.jpeg",
-        style = css_navbar_brand
-      ),
-      shiny::tags$span(
-        title
-      )
-    ),
-    theme = theme,
-    header = shiny::tags$head(
-      shiny::tags$link(rel = "preconnect",
-                       href = "https://fonts.googleapis.com"),
-      shiny::tags$style(shiny::HTML(css_pagina)),
-      shiny::tags$link(
-        rel = "stylesheet",
-        href = paste0(
-          "https://fonts.googleapis.com/css2?",
-          "family=Inter:wght@400;500;600;700&display=swap"
-        )
-      )
-    )
-  )
-
-  panels <- purrr::pmap(
-    list(menu_items, icons, pags),
-    function(item, icon, pag) {
-      bslib::nav_panel(
-        title = shiny::tags$span(
-          style = css_nav_menu_item,
-          item
-        ),
-        pag,
-        icon = bsicons::bs_icon(icon)
-      )
-    }
-  )
-
-  tag_contato <- shiny::actionLink(
-    inputId = "abrir_contato",
-    label = shiny::tags$span(
-      style = paste0(css_nav_menu_item, css_nav_menu_item_highlight),
-      bsicons::bs_icon("paperclip"),
-      shiny::tags$span(style = css_nav_menu_item_label, "Contato")
-    )
-  )
-
-  do.call(
-    bslib::page_navbar,
-    c(args_nav_bar,
-      panels,
-      list(bslib::nav_spacer()),
-      list(bslib::nav_item(tag_contato)),
-      list(...)
-    )
   )
 }

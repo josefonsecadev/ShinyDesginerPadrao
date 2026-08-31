@@ -1,23 +1,31 @@
-devtools::load_all(".")
-
-
-title <- "Câmara dos Deputados"
-menus <- c("Teste", "Teste2")
-icons <- c("house", "app")
-pags <- c("vouCriar", "Criarei")
-
-ui <- shiny::fluidPage(
-  ShinyDesginerPadrao::navbar(
-    title = title,
-    menu_items = menus,
-    icons = icons,
-    pags = pags
+menu_items <- list(
+  inicio = list(
+    label = "Início",
+    icon = "house",
+    ui = shiny::h2("Visão geral")
+  ),
+  analises = list(
+    label = "Análises",
+    icon = "graph-up",
+    items = list(
+      indicadores = list(
+        label = "Indicadores",
+        ui = shiny::h2("Indicadores")
+      ),
+      comparativos = list(
+        label = "Comparativos",
+        ui = shiny::h2("Comparativos")
+      )
+    )
   )
-
 )
 
-server <- function(input, output, session) {
-  ShinyDesginerPadrao::server_navbar(input, output, session)
-}
+ui <- ShinyDesginerPadrao::navbar(
+  title = "Meu dashboard",
+  menu_items = menu_items,
+  selected = "inicio"
+)
 
-shiny::runApp(shiny::shinyApp(ui, server))
+server <- function(input, output, session) {}
+
+shiny::shinyApp(ui, server)

@@ -1,0 +1,30 @@
+@use "fundamentos" as *;
+
+:root {
+  --sdp-cor-acao-principal: var(--bs-primary, #{$sdp-cor-azul-700});
+  --sdp-cor-acao-secundaria: var(--bs-secondary, #{$sdp-cor-cinza-700});
+  --sdp-cor-superficie-pagina: var(--bs-body-bg, #{$sdp-cor-cinza-050});
+  --sdp-cor-superficie-elevada: var(--bs-tertiary-bg, #{$sdp-cor-branco});
+  --sdp-cor-texto-principal: var(--bs-body-color, #{$sdp-cor-cinza-900});
+  --sdp-cor-texto-secundario: var(--bs-secondary-color, #{$sdp-cor-cinza-700});
+  --sdp-cor-borda-padrao: var(--bs-border-color, #{$sdp-cor-cinza-300});
+  --sdp-cor-foco: var(--bs-primary, #{$sdp-cor-azul-500});
+  --sdp-tipografia-familia-base: var(--bs-body-font-family, #{$sdp-fonte-familia-base});
+  --sdp-tipografia-tamanho-base: var(--bs-body-font-size, #{$sdp-fonte-tamanho-base});
+  --sdp-tipografia-peso-controle: #{$sdp-fonte-peso-600};
+  --sdp-tipografia-peso-titulo: #{$sdp-fonte-peso-700};
+  --sdp-tipografia-altura-linha-base: #{$sdp-fonte-altura-linha-base};
+  --sdp-espaco-0: #{$sdp-espaco-0};
+  --sdp-espaco-1: #{$sdp-espaco-1};
+  --sdp-espaco-2: #{$sdp-espaco-2};
+  --sdp-espaco-3: #{$sdp-espaco-3};
+  --sdp-espaco-4: #{$sdp-espaco-4};
+  --sdp-espaco-5: #{$sdp-espaco-5};
+  --sdp-raio-1: #{$sdp-raio-1};
+  --sdp-raio-2: #{$sdp-raio-2};
+  --sdp-raio-3: #{$sdp-raio-3};
+  --sdp-sombra-1: #{$sdp-sombra-1};
+  --sdp-duracao-rapida: #{$sdp-duracao-rapida};
+  --sdp-camada-sticky: #{$sdp-camada-sticky};
+  --sdp-navbar-altura-minima: 3.5rem;
+}
