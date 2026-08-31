@@ -73,12 +73,13 @@
   font-weight: var(--sdp-tipografia-peso-controle);
   line-height: var(--sdp-tipografia-altura-linha-base);
   transition:
-    background-color var(--sdp-duracao-rapida) ease,
+    border-color var(--sdp-duracao-rapida) ease,
     color var(--sdp-duracao-rapida) ease;
 }
 
 .sdp-navbar .nav-link:hover {
-  background-color: var(--sdp-cor-superficie-pagina);
+  background-color: transparent;
+  border-bottom-color: var(--sdp-navbar-cor-ativo);
   color: var(--sdp-navbar-cor-texto);
 }
 
@@ -93,7 +94,7 @@
 .sdp-navbar .navbar-nav .active > .nav-link,
 .sdp-navbar .navbar-nav .active > .dropdown-toggle,
 .sdp-navbar .nav-link[aria-current="page"] {
-  background-color: var(--sdp-cor-superficie-pagina);
+  background-color: transparent;
   border-bottom-color: var(--sdp-navbar-cor-ativo);
   color: var(--sdp-navbar-cor-texto);
 }
@@ -103,7 +104,8 @@
 }
 
 .sdp-navbar .dropdown-toggle:hover {
-  background-color: var(--sdp-cor-superficie-pagina);
+  background-color: transparent;
+  border-bottom-color: var(--sdp-navbar-cor-ativo);
   color: var(--sdp-navbar-cor-texto);
 }
 
