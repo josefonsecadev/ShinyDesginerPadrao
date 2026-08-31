@@ -276,7 +276,7 @@ as_nav_list <- function(items) {
 }
 
 sdp_html_dependency <- function() {
-  www_path <- system.file("www", package = "ShinyDesginerPadrao")
+  www_path <- sdp_www_path()
   if (!nzchar(www_path)) {
     stop("Os assets do pacote não foram encontrados.", call. = FALSE)
   }
@@ -290,16 +290,37 @@ sdp_html_dependency <- function() {
     name = "shiny-designer-padrao",
     version = package_version,
     src = www_path,
-    stylesheet = "css/shiny-designer-padrao.css",
-    package = "ShinyDesginerPadrao"
+    stylesheet = "css/shiny-designer-padrao.css"
   )
+}
+
+sdp_www_path <- function(pkgname = "ShinyDesginerPadrao") {
+  installed_path <- system.file("www", package = pkgname)
+  if (nzchar(installed_path)) {
+    return(installed_path)
+  }
+
+  development_root <- if (requireNamespace("pkgload", quietly = TRUE)) {
+    tryCatch(pkgload::pkg_path(), error = function(error) getwd())
+  } else {
+    getwd()
+  }
+  development_path <- file.path(development_root, "inst", "www")
+  if (dir.exists(development_path)) {
+    return(normalizePath(development_path, winslash = "/", mustWork = TRUE))
+  }
+
+  ""
 }
 
 #' @export
 #' @noRd
 .onLoad <- function(libname, pkgname) {
-  shiny::addResourcePath(
-    prefix = "ShinyDesginerPadrao-www",
-    directoryPath = system.file("www", package = pkgname)
-  )
+  www_path <- sdp_www_path(pkgname)
+  if (nzchar(www_path)) {
+    shiny::addResourcePath(
+      prefix = "ShinyDesginerPadrao-www",
+      directoryPath = www_path
+    )
+  }
 }
