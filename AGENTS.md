@@ -33,3 +33,4 @@ O pacote é uma biblioteca de componentes. Não converta o repositório em uma a
 ## Verificação
 
 Valide em proporção ao risco. Para mudanças públicas, execute documentação, testes e `R CMD check` quando o ambiente permitir. Para mudanças visuais, complemente os testes automatizados com inspeção renderizada nos estados e larguras relevantes. Informe claramente o que foi executado, o que falhou e o que não pôde ser verificado.
+- Ao inserir uma nova funcionalidade Shiny ou realizar qualquer alteração visual, como cores, tipografia, espaçamentos, layout, componentes, estados ou responsividade, execute localmente o exemplo correspondente, mantenha o servidor ativo e aguarde a validação visual e funcional do usuário antes de considerar a tarefa concluída. Testes automatizados não substituem essa validação.

@@ -12,10 +12,12 @@ menu_items <- list(
     items = list(
       panorama = list(
         label = "Panorama",
+        description = "Visão geral do período",
         ui = shiny::h2("Panorama do período")
       ),
       evidencias = list(
         label = "Evidências",
+        description = "Fontes e sinais relevantes",
         ui = shiny::h2("Evidências e fontes")
       )
     )

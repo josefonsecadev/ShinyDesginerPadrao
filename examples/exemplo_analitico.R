@@ -12,10 +12,12 @@ menu_items <- list(
     items = list(
       distribuicoes = list(
         label = "Distribuições",
+        description = "Composição e dispersão",
         ui = shiny::h2("Distribuições")
       ),
       tendencias = list(
         label = "Tendências",
+        description = "Evolução ao longo do tempo",
         ui = shiny::h2("Tendências")
       )
     )

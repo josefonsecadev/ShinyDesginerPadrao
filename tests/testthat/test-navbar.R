@@ -36,6 +36,34 @@ test_that("navbar aceita grupos de navegação", {
   expect_match(html, "Mensal")
 })
 
+test_that("submenu do navbar abre por hover e foco com bordas arredondadas", {
+  css <- paste(
+    readLines(file.path(sdp_www_path(), "css", "shiny-designer-padrao.css")),
+    collapse = "\n"
+  )
+
+  expect_match(
+    css,
+    "sdp-navbar \\.navbar-nav > li\\.dropdown:hover > \\.dropdown-menu"
+  )
+  expect_match(css, "dropdown:focus-within > \\.dropdown-menu")
+  expect_match(css, "top: 100%")
+  expect_match(css, "inset-inline-start: 0")
+  expect_match(css, "width: auto")
+  expect_match(css, "min-width: 9rem")
+  expect_match(css, "sdp-navbar-cor-fundo")
+  expect_match(css, "background-color: var\\(--sdp-navbar-cor-fundo\\)")
+  expect_match(css, "border-inline-start-color: transparent")
+  expect_match(css, "sdp-navbar-cor-item-ativo")
+  expect_match(css, "sdp-tema-navbar-cor-texto-secundario")
+  expect_match(css, "border-bottom-color: transparent")
+  expect_match(css, "color: var\\(--sdp-navbar-cor-item-ativo\\)")
+  expect_match(css, "font-weight: var\\(--sdp-tipografia-peso-titulo\\)")
+  expect_match(css, "sdp-navbar__item-label")
+  expect_match(css, "sdp-navbar__dropdown--fechado")
+  expect_match(css, "border-radius: var\\(--sdp-navbar-raio-submenu\\)")
+})
+
 test_that("navbar mantém o formato legado com páginas paralelas", {
   ui <- navbar(
     title = "Dashboard",
@@ -80,6 +108,7 @@ test_that("navbar anexa uma única dependência visual", {
 
   expect_length(matching, 1)
   expect_identical(matching[[1]]$stylesheet, "css/shiny-designer-padrao.css")
+  expect_identical(matching[[1]]$script, "js/shiny-designer-padrao.js")
 })
 
 test_that("sdp_theme cria os cinco designers", {
@@ -146,6 +175,46 @@ test_that("navbar inclui o campo Sobre mim por padrão", {
   expect_match(html, "sdp-navbar__contact")
 })
 
+test_that("navbar mantém a navegação à esquerda e o contato à direita", {
+  ui <- navbar(
+    title = "Dashboard",
+    menu_items = list(inicio = "Conteúdo"),
+    designer = "editorial"
+  )
+
+  html <- as.character(ui)
+  navigation_position <- regexpr("sdp-navbar__item-label", html)[[1]]
+  spacer_position <- regexpr("bslib-nav-spacer", html)[[1]]
+  contact_position <- regexpr("sdp-navbar__contact", html)[[1]]
+
+  expect_lt(navigation_position, spacer_position)
+  expect_lt(spacer_position, contact_position)
+  expect_match(html, 'data-sdp-designer="editorial"')
+})
+
+test_that("navbar aceita descricao nos itens de submenu", {
+  ui <- navbar(
+    title = "Dashboard",
+    menu_items = list(
+      contexto = list(
+        label = "Contexto",
+        items = list(
+          panorama = list(
+            label = "Panorama",
+            description = "Visao do mes",
+            ui = "Conteudo"
+          )
+        )
+      )
+    )
+  )
+
+  html <- as.character(ui)
+
+  expect_match(html, "sdp-navbar__item-description")
+  expect_match(html, "Visao do mes")
+})
+
 test_that("navbar permite ocultar o campo Sobre mim", {
   ui <- navbar(
     title = "Dashboard",
@@ -168,6 +237,7 @@ test_that("telacontato usa classes do componente e dependência central", {
   expect_match(html, "sdp-contato")
   expect_match(html, "Fonseca")
   expect_match(html, "sdp-contato__links")
+  expect_match(html, "sdp-contato__introducao")
   expect_no_match(html, "style=")
   expect_length(matching, 1)
 })

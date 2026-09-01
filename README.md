@@ -68,6 +68,27 @@ os tokens do designer ativo para produzir a variação correspondente.
 Cada novo componente também deve ser incluído nos cinco arquivos de exemplo,
 para que as cinco versões sejam demonstradas e verificadas em conjunto.
 
+Itens de submenu podem receber uma descriÃ§Ã£o curta para reforÃ§ar a hierarquia
+da navegaÃ§Ã£o:
+
+```r
+menu_items <- list(
+  contexto = list(
+    label = "Contexto",
+    items = list(
+      panorama = list(
+        label = "Panorama",
+        description = "VisÃ£o geral do perÃ­odo",
+        ui = shiny::h2("Panorama")
+      )
+    )
+  )
+)
+```
+
+`description` Ã© opcional e Ã© exibida somente nos itens de submenu. Itens sem
+descriÃ§Ã£o continuam usando o formato compacto anterior.
+
 ## Desenvolvimento
 
 ```r

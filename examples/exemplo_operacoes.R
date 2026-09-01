@@ -10,9 +10,14 @@ menu_items <- list(
     label = "Incidentes",
     icon = "exclamation-triangle",
     items = list(
-      ativos = list(label = "Ativos", ui = shiny::h2("Incidentes ativos")),
+      ativos = list(
+        label = "Ativos",
+        description = "Situações em andamento",
+        ui = shiny::h2("Incidentes ativos")
+      ),
       historico = list(
         label = "Histórico",
+        description = "Ocorrências encerradas",
         ui = shiny::h2("Histórico de incidentes")
       )
     )

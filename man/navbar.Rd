@@ -61,6 +61,10 @@ A função monta uma página com navegação superior usando bslib. O formato
 recomendado para \code{menu_items} é uma lista nomeada de listas com \code{label} e
 \code{ui}, podendo incluir \code{value}, \code{icon} e \code{items} para grupos de navegação.
 }
+\details{
+Itens de submenu podem incluir \code{description} para exibir uma
+linha auxiliar de contexto abaixo do rÃ³tulo. O campo Ã© opcional.
+}
 \examples{
 \dontrun{
 menu_items <- list(

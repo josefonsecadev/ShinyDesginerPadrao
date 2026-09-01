@@ -10,9 +10,14 @@ menu_items <- list(
     label = "Desempenho",
     icon = "graph-up-arrow",
     items = list(
-      metas = list(label = "Metas", ui = shiny::h2("Metas e resultados")),
+      metas = list(
+        label = "Metas",
+        description = "Objetivos e resultados-chave",
+        ui = shiny::h2("Metas e resultados")
+      ),
       comparativos = list(
         label = "Comparativos",
+        description = "Leitura entre períodos",
         ui = shiny::h2("Comparativos executivos")
       )
     )

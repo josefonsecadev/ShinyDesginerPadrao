@@ -8,6 +8,9 @@
 #' @param menu_items Lista nomeada de itens ou grupos de navegação.
 #' @param theme Tema bslib usado pela página. Se `NULL`, usa o tema global
 #'   configurado por `sdp_use_designer()` ou o tema padrão do bslib.
+#' @details Itens de submenu podem incluir `description` para exibir uma
+#'   linha auxiliar de contexto abaixo do rÃ³tulo. O campo Ã© opcional.
+#'
 #' @param selected Valor do painel selecionado inicialmente.
 #' @param id Identificador da navegação para controle programático.
 #' @param brand Conteúdo opcional exibido antes do título, como uma tag de
@@ -81,6 +84,12 @@ navbar <- function(
   normalized_menu <- normalize_menu_items(menu_items)
   nav_items <- unname(lapply(normalized_menu, build_nav_item))
 
+  designer_name <- attr(theme, "sdp-designer")
+  navbar_attribs <- list(class = "sdp-navbar")
+  if (!is.null(designer_name)) {
+    navbar_attribs[["data-sdp-designer"]] <- designer_name
+  }
+
   title_content <- shiny::tags$span(
     class = "sdp-navbar__brand",
     if (!is.null(brand)) {
@@ -94,25 +103,27 @@ navbar <- function(
     id = id,
     selected = selected,
     theme = theme,
-    navbar_options = list(attribs = list(class = "sdp-navbar"))
+    navbar_options = list(attribs = navbar_attribs)
   )
 
+  navbar_items <- nav_items
+
   if (length(right_items) > 0 || isTRUE(contact)) {
-    page_args <- c(
-      page_args,
+    navbar_items <- c(
+      navbar_items,
       list(bslib::nav_spacer())
     )
 
     if (length(right_items) > 0) {
-      page_args <- c(
-        page_args,
+      navbar_items <- c(
+        navbar_items,
         unname(lapply(as_nav_list(right_items), bslib::nav_item))
       )
     }
 
     if (isTRUE(contact)) {
-      page_args <- c(
-        page_args,
+      navbar_items <- c(
+        navbar_items,
         list(
           bslib::nav_item(
             shiny::actionButton(
@@ -128,7 +139,7 @@ navbar <- function(
 
   page <- do.call(
     bslib::page_navbar,
-    c(page_args, nav_items, list(...))
+    c(page_args, navbar_items, list(...))
   )
 
   if (isTRUE(include_css)) {
@@ -206,7 +217,15 @@ normalize_menu_items <- function(menu_items, path = "item") {
 normalize_menu_item <- function(item, item_name) {
   is_specification <- is.list(item) &&
     !inherits(item, c("shiny.tag", "shiny.tag.list")) &&
-    any(names(item) %in% c("label", "value", "icon", "ui", "content", "items"))
+    any(names(item) %in% c(
+      "label",
+      "value",
+      "icon",
+      "ui",
+      "content",
+      "description",
+      "items"
+    ))
 
   if (!is_specification) {
     return(list(
@@ -214,6 +233,7 @@ normalize_menu_item <- function(item, item_name) {
       value = item_name,
       icon = NULL,
       ui = item,
+      description = NULL,
       items = NULL
     ))
   }
@@ -229,6 +249,12 @@ normalize_menu_item <- function(item, item_name) {
   }
   if (!is.character(value) || length(value) != 1L || !nzchar(value)) {
     stop("Cada item precisa de um `value` textual não vazio.", call. = FALSE)
+  }
+
+  description <- item$description
+  if (!is.null(description) &&
+      (!is.character(description) || length(description) != 1L)) {
+    stop("Cada `description` precisa ser textual e Ãºnica.", call. = FALSE)
   }
 
   children <- item$items
@@ -249,18 +275,22 @@ normalize_menu_item <- function(item, item_name) {
     value = value,
     icon = item$icon,
     ui = content,
+    description = description,
     items = children
   )
 }
 
-build_nav_item <- function(item) {
+build_nav_item <- function(item, submenu = FALSE) {
   if (!is.null(item$items)) {
-    children <- unname(lapply(item$items, build_nav_item))
+    children <- unname(lapply(
+      item$items,
+      function(child) build_nav_item(child, submenu = TRUE)
+    ))
     return(do.call(
       bslib::nav_menu,
       c(
         list(
-          title = nav_item_title(item$label),
+          title = nav_item_title(item$label, submenu = submenu),
           value = item$value,
           icon = nav_item_icon(item$icon, item$label)
         ),
@@ -270,7 +300,11 @@ build_nav_item <- function(item) {
   }
 
   arguments <- list(
-    title = nav_item_title(item$label),
+    title = nav_item_title(
+      item$label,
+      description = item$description,
+      submenu = submenu
+    ),
     value = item$value,
     icon = nav_item_icon(item$icon, item$label)
   )
@@ -282,10 +316,32 @@ build_nav_item <- function(item) {
   do.call(bslib::nav_panel, arguments)
 }
 
-nav_item_title <- function(label) {
-  shiny::tags$span(
-    class = "sdp-navbar__item",
+nav_item_title <- function(label, description = NULL, submenu = FALSE) {
+  item_class <- if (isTRUE(submenu)) {
+    "sdp-navbar__item sdp-navbar__item--submenu"
+  } else {
+    "sdp-navbar__item"
+  }
+
+  item_content <- list(
     shiny::tags$span(class = "sdp-navbar__item-label", label)
+  )
+
+  if (isTRUE(submenu) && !is.null(description) && nzchar(description)) {
+    item_content <- c(
+      item_content,
+      list(
+        shiny::tags$span(
+          class = "sdp-navbar__item-description",
+          description
+        )
+      )
+    )
+  }
+
+  shiny::tags$span(
+    class = item_class,
+    item_content
   )
 }
 
@@ -329,7 +385,8 @@ sdp_html_dependency <- function() {
     name = "shiny-designer-padrao",
     version = package_version,
     src = www_path,
-    stylesheet = "css/shiny-designer-padrao.css"
+    stylesheet = "css/shiny-designer-padrao.css",
+    script = "js/shiny-designer-padrao.js"
   )
 }
 

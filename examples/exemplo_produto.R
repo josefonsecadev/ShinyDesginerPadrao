@@ -10,13 +10,21 @@ menu_items <- list(
     label = "Comportamento",
     icon = "people",
     items = list(
-      adocao = list(label = "Adoção", ui = shiny::h2("Adoção")),
-      jornadas = list(label = "Jornadas", ui = shiny::h2("Jornadas"))
+      adocao = list(
+        label = "Adoção",
+        description = "Uso e ativação",
+        ui = shiny::h2("Adoção")
+      ),
+      jornadas = list(
+        label = "Jornadas",
+        description = "Caminhos de descoberta",
+        ui = shiny::h2("Jornadas")
+      )
     )
   ),
   experimentos = list(
     label = "Experimentos",
-    icon = "beaker",
+    icon = "lightbulb",
     ui = shiny::h2("Experimentos")
   )
 )
