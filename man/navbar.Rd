@@ -16,6 +16,7 @@ navbar(
   icons = NULL,
   pags = NULL,
   designer = NULL,
+  contact = TRUE,
   ...
 )
 }
@@ -46,6 +47,9 @@ ser anexada ao componente.}
 
 \item{designer}{Nome de um preset visual de \code{sdp_theme()}. Quando informado,
 substitui \code{theme}.}
+
+\item{contact}{Lógico que indica se o botão estático “Sobre mim” deve ser
+exibido ao final da barra.}
 
 \item{...}{Argumentos adicionais enviados para \code{\link[bslib:page_navbar]{bslib::page_navbar()}}.}
 }

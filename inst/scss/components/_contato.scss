@@ -1,0 +1,160 @@
+@use "../settings/fundamentos" as *;
+
+.sdp-contato {
+  --sdp-contato-cor-fundo: var(--sdp-cor-superficie-elevada);
+  --sdp-contato-cor-texto: var(--sdp-cor-texto-principal);
+  --sdp-contato-cor-texto-secundario: var(--sdp-cor-texto-secundario);
+  --sdp-contato-cor-destaque: var(--sdp-cor-acao-principal);
+  --sdp-contato-cor-avatar: var(--sdp-cor-superficie-pagina);
+  --sdp-contato-cor-avatar-texto: var(--sdp-cor-acao-principal);
+  display: grid;
+  grid-template-columns: minmax(9rem, 0.8fr) minmax(0, 1.2fr);
+  min-height: var(--sdp-contato-altura-minima);
+  overflow: hidden;
+  border: 1px solid var(--sdp-cor-borda-padrao);
+  border-radius: var(--sdp-raio-3);
+  background-color: var(--sdp-contato-cor-fundo);
+  color: var(--sdp-contato-cor-texto);
+  font-family: var(--sdp-tipografia-familia-base);
+}
+
+.sdp-contato__visual {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: var(--sdp-espaco-3);
+  padding: var(--sdp-espaco-5);
+  background-color: var(--sdp-contato-cor-destaque);
+  color: var(--sdp-contato-cor-avatar);
+  text-align: center;
+}
+
+.sdp-contato__avatar {
+  display: grid;
+  width: var(--sdp-contato-tamanho-avatar);
+  aspect-ratio: 1;
+  place-items: center;
+  border: 0.25rem solid color-mix(in srgb, currentColor 35%, transparent);
+  border-radius: 50%;
+  background-color: var(--sdp-contato-cor-avatar);
+  color: var(--sdp-contato-cor-avatar-texto);
+  font-size: calc(var(--sdp-tipografia-tamanho-base) * 1.5);
+  font-weight: var(--sdp-tipografia-peso-titulo);
+}
+
+.sdp-contato__assinatura {
+  margin: 0;
+  color: inherit;
+  font-size: var(--sdp-tipografia-tamanho-base);
+  font-weight: var(--sdp-tipografia-peso-controle);
+}
+
+.sdp-contato__conteudo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--sdp-espaco-3);
+  padding: var(--sdp-espaco-5);
+}
+
+.sdp-contato__titulo,
+.sdp-contato__descricao,
+.sdp-contato__detalhes {
+  margin: 0;
+}
+
+.sdp-contato__titulo {
+  color: var(--sdp-contato-cor-texto);
+  font-size: calc(var(--sdp-tipografia-tamanho-base) * 1.5);
+  font-weight: var(--sdp-tipografia-peso-titulo);
+  line-height: 1.2;
+}
+
+.sdp-contato__descricao {
+  color: var(--sdp-contato-cor-texto-secundario);
+  font-size: var(--sdp-tipografia-tamanho-base);
+}
+
+.sdp-contato__detalhes {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--sdp-espaco-2) var(--sdp-espaco-3);
+  padding-top: var(--sdp-espaco-3);
+  border-top: 1px solid var(--sdp-cor-borda-padrao);
+}
+
+.sdp-contato__detalhes dt {
+  color: var(--sdp-contato-cor-texto-secundario);
+  font-size: calc(var(--sdp-tipografia-tamanho-base) * 0.875);
+  font-weight: var(--sdp-tipografia-peso-controle);
+}
+
+.sdp-contato__detalhes dd {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+  color: var(--sdp-contato-cor-texto);
+}
+
+.sdp-contato__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sdp-espaco-2);
+}
+
+.sdp-contato__link {
+  display: inline-flex;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--sdp-raio-2);
+  color: var(--sdp-contato-cor-texto-secundario);
+  text-decoration: none;
+  transition: color var(--sdp-duracao-rapida) ease,
+    background-color var(--sdp-duracao-rapida) ease;
+}
+
+.sdp-contato__link:hover {
+  background-color: var(--sdp-cor-superficie-pagina);
+  color: var(--sdp-cor-acao-principal);
+}
+
+.sdp-contato__link-label {
+  font-size: calc(var(--sdp-tipografia-tamanho-base) * 0.875);
+  font-weight: var(--sdp-tipografia-peso-controle);
+}
+
+.sdp-contato__link:focus-visible {
+  outline: 0.15rem solid var(--sdp-cor-foco);
+  outline-offset: 0.15rem;
+}
+
+.sdp-navbar__contact {
+  display: inline-flex;
+  min-height: 2.5rem;
+  align-items: center;
+  gap: var(--sdp-espaco-2);
+  border-radius: var(--sdp-raio-2);
+}
+
+.sdp-navbar__contact:focus-visible {
+  outline: 0.15rem solid var(--sdp-cor-foco);
+  outline-offset: 0.15rem;
+}
+
+@media (max-width: $sdp-breakpoint-md) {
+  .sdp-contato {
+    grid-template-columns: 1fr;
+  }
+
+  .sdp-contato__visual {
+    padding-block: var(--sdp-espaco-4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sdp-contato__link {
+    transition: none;
+  }
+}

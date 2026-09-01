@@ -1,101 +1,95 @@
-css <- "
-.cont-principal-contato {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  background: white;
-}
-.info-gerais {
-  flex: 1;
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  justify-content: center;
-  align-items: center;
-}
-.info-gerais .contatos-icones {
-  display: flex;
-  gap: 1rem;
-}
-.info-gerais .contatos-icones a {
-  color: inherit;
-  font-size: 1.6rem;
-}
-"
-
+#' Cria o conteúdo estático do modal Sobre mim
+#'
+#' @return Um objeto de interface do Shiny com informações de contato
+#'   estáticas.
 #' @export
 telacontato <- function() {
-  shiny::fluidPage(
-    shiny::tags$style(shiny::HTML(css)),
+  content <- shiny::tags$section(
+    class = "sdp-contato",
+    `aria-labelledby` = "sdp-contato-titulo",
     shiny::tags$div(
-      class = "cont-principal-contato",
+      class = "sdp-contato__visual",
       shiny::tags$div(
-        class = "info-gerais",
-        shiny::tags$h4("José Fonseca"),
-        shiny::tags$p(
-          shiny::tags$span("Especialista em dados")
-        ),
-        shiny::tags$p(
-          shiny::tags$strong("Telefone: "), "(84) 98738-1057"
-        ),
-        shiny::tags$div(
-          class = "contatos-icones",
-          shiny::tags$a(
-            href = "mailto:jose.fonseca.dev@gmail.com",
-            bsicons::bs_icon("envelope-at")
-          ),
-          shiny::tags$a(
-            href = "https://github.com/josefonsecadev",
-            target = "_blank",
-            bsicons::bs_icon("github")
-          ),
-          shiny::tags$a(
-            href = "https://linkedin.com/in/jose-ferreira-fonseca-neto",
-            target = "_blank",
-            bsicons::bs_icon("linkedin")
-          ),
-          shiny::tags$a(
-            href = "
-              https://wa.me//5584987381075?
-              text=Tenho%20interesse%20em%20conversar%20sobre%20dados
-              ",
-            target = "_blank",
-            bsicons::bs_icon("whatsapp")
-          )
-        )
+        class = "sdp-contato__avatar",
+        `aria-hidden` = "true",
+        "JF"
       ),
-      shiny::tags$div(
-        style = "width: 1px; background-color: rgba(0, 0, 0, 0.1);"
+      shiny::tags$p(
+        class = "sdp-contato__assinatura",
+        "José Fonseca"
+      )
+    ),
+    shiny::tags$div(
+      class = "sdp-contato__conteudo",
+      shiny::tags$h2(
+        id = "sdp-contato-titulo",
+        class = "sdp-contato__titulo",
+        "José Fonseca"
       ),
-      shiny::tags$div(
-        class = "imagem-contato",
-        style = paste0(
-          c(
-            "flex: 1;",
-            "display: flex;",
-            "align-items: center;",
-            "justify-content: center;",
-            "padding: 1.5rem;"
-          )
+      shiny::tags$p(
+        class = "sdp-contato__descricao",
+        "Especialista em dados"
+      ),
+      shiny::tags$dl(
+        class = "sdp-contato__detalhes",
+        shiny::tags$dt("Telefone"),
+        shiny::tags$dd("(84) 98738-1057"),
+        shiny::tags$dt("E-mail"),
+        shiny::tags$dd("jose.fonseca.dev@gmail.com")
+      ),
+      shiny::tags$nav(
+        class = "sdp-contato__links",
+        `aria-label` = "Redes e canais de contato",
+        shiny::tags$a(
+          class = "sdp-contato__link",
+          href = "mailto:jose.fonseca.dev@gmail.com",
+          `aria-label` = "Enviar e-mail",
+          title = "Enviar e-mail",
+          shiny::tags$span(class = "sdp-contato__link-label", "E-mail")
         ),
-        shiny::tags$img(
-          src = "ShinyDesginerPadrao-www/png/foto-perfil-nav-bar.jpeg",
-          style = paste0(
-            c(
-              "max-width: 100%;",
-              "max-height: 300px;",
-              "border-radius: 8px;",
-              "object-fit: cover;"
-            )
-          )
+        shiny::tags$a(
+          class = "sdp-contato__link",
+          href = "https://github.com/josefonsecadev",
+          target = "_blank",
+          rel = "noopener noreferrer",
+          `aria-label` = "Abrir GitHub",
+          title = "Abrir GitHub",
+          shiny::tags$span(class = "sdp-contato__link-label", "GitHub")
+        ),
+        shiny::tags$a(
+          class = "sdp-contato__link",
+          href = "https://linkedin.com/in/jose-ferreira-fonseca-neto",
+          target = "_blank",
+          rel = "noopener noreferrer",
+          `aria-label` = "Abrir LinkedIn",
+          title = "Abrir LinkedIn",
+          shiny::tags$span(class = "sdp-contato__link-label", "LinkedIn")
+        ),
+        shiny::tags$a(
+          class = "sdp-contato__link",
+          href = paste0(
+            "https://wa.me/5584987381075?text=",
+            "Tenho%20interesse%20em%20conversar%20sobre%20dados"
+          ),
+          target = "_blank",
+          rel = "noopener noreferrer",
+          `aria-label` = "Abrir WhatsApp",
+          title = "Abrir WhatsApp",
+          shiny::tags$span(class = "sdp-contato__link-label", "WhatsApp")
         )
       )
     )
   )
+
+  htmltools::attachDependencies(
+    content,
+    sdp_html_dependency(),
+    append = TRUE
+  )
 }
 
 #' @export
+#' @noRd
 server_navbar <- function(input, output, session) {
   shiny::observeEvent(input$abrir_contato, {
     shiny::showModal(
@@ -106,5 +100,5 @@ server_navbar <- function(input, output, session) {
         size = "l"
       )
     )
-  })
+  }, ignoreInit = TRUE)
 }

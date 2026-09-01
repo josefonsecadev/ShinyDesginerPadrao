@@ -30,6 +30,8 @@ ui <- ShinyDesginerPadrao::navbar(
   selected = "monitoramento"
 )
 
-server <- function(input, output, session) {}
+server <- function(input, output, session) {
+  ShinyDesginerPadrao::server_navbar(input, output, session)
+}
 
 shiny::shinyApp(ui, server)

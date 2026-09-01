@@ -20,6 +20,8 @@
 #'   `icons`.
 #' @param designer Nome de um preset visual de `sdp_theme()`. Quando informado,
 #'   substitui `theme`.
+#' @param contact Lógico que indica se o botão estático “Sobre mim” deve ser
+#'   exibido ao final da barra.
 #' @param ... Argumentos adicionais enviados para [bslib::page_navbar()].
 #'
 #' @return Um objeto de interface do Shiny.
@@ -57,6 +59,7 @@ navbar <- function(
     icons = NULL,
     pags = NULL,
     designer = NULL,
+    contact = TRUE,
     ...) {
   if (!is.null(designer)) {
     theme <- sdp_theme(designer)
@@ -94,12 +97,33 @@ navbar <- function(
     navbar_options = list(attribs = list(class = "sdp-navbar"))
   )
 
-  if (length(right_items) > 0) {
+  if (length(right_items) > 0 || isTRUE(contact)) {
     page_args <- c(
       page_args,
-      list(bslib::nav_spacer()),
-      unname(lapply(as_nav_list(right_items), bslib::nav_item))
+      list(bslib::nav_spacer())
     )
+
+    if (length(right_items) > 0) {
+      page_args <- c(
+        page_args,
+        unname(lapply(as_nav_list(right_items), bslib::nav_item))
+      )
+    }
+
+    if (isTRUE(contact)) {
+      page_args <- c(
+        page_args,
+        list(
+          bslib::nav_item(
+            shiny::actionButton(
+              inputId = "abrir_contato",
+              label = "Sobre mim",
+              class = "sdp-navbar__contact"
+            )
+          )
+        )
+      )
+    }
   }
 
   page <- do.call(

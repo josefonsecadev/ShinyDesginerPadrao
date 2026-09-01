@@ -133,6 +133,45 @@ test_that("navbar aceita um designer diretamente", {
   expect_match(as.character(ui), "sdp-navbar")
 })
 
+test_that("navbar inclui o campo Sobre mim por padrão", {
+  ui <- navbar(
+    title = "Dashboard",
+    menu_items = list(inicio = "Conteúdo")
+  )
+
+  html <- as.character(ui)
+
+  expect_match(html, "abrir_contato")
+  expect_match(html, "Sobre mim")
+  expect_match(html, "sdp-navbar__contact")
+})
+
+test_that("navbar permite ocultar o campo Sobre mim", {
+  ui <- navbar(
+    title = "Dashboard",
+    menu_items = list(inicio = "Conteúdo"),
+    contact = FALSE
+  )
+
+  expect_no_match(as.character(ui), "abrir_contato")
+})
+
+test_that("telacontato usa classes do componente e dependência central", {
+  ui <- telacontato()
+  html <- as.character(ui)
+  dependencies <- htmltools::renderTags(ui)$dependencies
+  matching <- Filter(
+    function(dependency) identical(dependency$name, "shiny-designer-padrao"),
+    dependencies
+  )
+
+  expect_match(html, "sdp-contato")
+  expect_match(html, "Fonseca")
+  expect_match(html, "sdp-contato__links")
+  expect_no_match(html, "style=")
+  expect_length(matching, 1)
+})
+
 test_that("sdp_use_designer configura o tema global uma única vez", {
   previous <- bslib::bs_global_get()
   on.exit(if (is.null(previous)) {
