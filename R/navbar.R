@@ -6,7 +6,8 @@
 #'
 #' @param title Título exibido na marca da barra de navegação.
 #' @param menu_items Lista nomeada de itens ou grupos de navegação.
-#' @param theme Tema bslib usado pela página.
+#' @param theme Tema bslib usado pela página. Se `NULL`, usa o tema global
+#'   configurado por `sdp_use_designer()` ou o tema padrão do bslib.
 #' @param selected Valor do painel selecionado inicialmente.
 #' @param id Identificador da navegação para controle programático.
 #' @param brand Conteúdo opcional exibido antes do título, como uma tag de
@@ -17,6 +18,8 @@
 #' @param icons Formato legado: vetor de nomes de ícones usado com `pags`.
 #' @param pags Formato legado: vetor de conteúdos usado com `menu_items` e
 #'   `icons`.
+#' @param designer Nome de um preset visual de `sdp_theme()`. Quando informado,
+#'   substitui `theme`.
 #' @param ... Argumentos adicionais enviados para [bslib::page_navbar()].
 #'
 #' @return Um objeto de interface do Shiny.
@@ -45,7 +48,7 @@
 navbar <- function(
     title,
     menu_items,
-    theme = bslib::bs_theme(version = 5),
+    theme = NULL,
     selected = NULL,
     id = NULL,
     brand = NULL,
@@ -53,7 +56,19 @@ navbar <- function(
     include_css = TRUE,
     icons = NULL,
     pags = NULL,
+    designer = NULL,
     ...) {
+  if (!is.null(designer)) {
+    theme <- sdp_theme(designer)
+  }
+
+  if (is.null(theme)) {
+    theme <- bslib::bs_global_get()
+  }
+  if (is.null(theme)) {
+    theme <- bslib::bs_theme(version = 5)
+  }
+
   if (!is.null(pags)) {
     menu_items <- legacy_menu_items(menu_items, icons, pags)
   } else if (!is.null(icons)) {

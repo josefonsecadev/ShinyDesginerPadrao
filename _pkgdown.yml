@@ -1,6 +1,13 @@
 url: https://github.com/josefonsecadev/ShinyDesginerPadrao
 
 reference:
+- title: Temas e designers
+  contents:
+  - sdp_theme
+  - sdp_designers
+  - sdp_use_designer
+  - sdp_current_designer
+  - sdp_clear_designer
 - title: Componentes de navegação
   contents:
   - navbar

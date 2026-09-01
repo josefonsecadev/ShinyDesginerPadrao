@@ -2,5 +2,10 @@
 
 export(.onLoad)
 export(navbar)
+export(sdp_clear_designer)
+export(sdp_current_designer)
+export(sdp_designers)
+export(sdp_theme)
+export(sdp_use_designer)
 export(server_navbar)
 export(telacontato)

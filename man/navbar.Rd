@@ -7,7 +7,7 @@
 navbar(
   title,
   menu_items,
-  theme = bslib::bs_theme(version = 5),
+  theme = NULL,
   selected = NULL,
   id = NULL,
   brand = NULL,
@@ -15,6 +15,7 @@ navbar(
   include_css = TRUE,
   icons = NULL,
   pags = NULL,
+  designer = NULL,
   ...
 )
 }
@@ -23,7 +24,8 @@ navbar(
 
 \item{menu_items}{Lista nomeada de itens ou grupos de navegação.}
 
-\item{theme}{Tema bslib usado pela página.}
+\item{theme}{Tema bslib usado pela página. Se \code{NULL}, usa o tema global
+configurado por \code{sdp_use_designer()} ou o tema padrão do bslib.}
 
 \item{selected}{Valor do painel selecionado inicialmente.}
 
@@ -41,6 +43,9 @@ ser anexada ao componente.}
 
 \item{pags}{Formato legado: vetor de conteúdos usado com \code{menu_items} e
 \code{icons}.}
+
+\item{designer}{Nome de um preset visual de \code{sdp_theme()}. Quando informado,
+substitui \code{theme}.}
 
 \item{...}{Argumentos adicionais enviados para \code{\link[bslib:page_navbar]{bslib::page_navbar()}}.}
 }

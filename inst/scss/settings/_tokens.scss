@@ -12,7 +12,7 @@
   --sdp-tipografia-familia-base: var(--bs-body-font-family, #{$sdp-fonte-familia-base});
   --sdp-tipografia-tamanho-base: var(--bs-body-font-size, #{$sdp-fonte-tamanho-base});
   --sdp-tipografia-peso-controle: #{$sdp-fonte-peso-600};
-  --sdp-tipografia-peso-titulo: #{$sdp-fonte-peso-700};
+  --sdp-tipografia-peso-titulo: var(--bs-heading-font-weight, #{$sdp-fonte-peso-700});
   --sdp-tipografia-altura-linha-base: #{$sdp-fonte-altura-linha-base};
   --sdp-espaco-0: #{$sdp-espaco-0};
   --sdp-espaco-1: #{$sdp-espaco-1};
@@ -20,10 +20,10 @@
   --sdp-espaco-3: #{$sdp-espaco-3};
   --sdp-espaco-4: #{$sdp-espaco-4};
   --sdp-espaco-5: #{$sdp-espaco-5};
-  --sdp-raio-1: #{$sdp-raio-1};
-  --sdp-raio-2: #{$sdp-raio-2};
-  --sdp-raio-3: #{$sdp-raio-3};
-  --sdp-sombra-1: #{$sdp-sombra-1};
+  --sdp-raio-1: var(--bs-border-radius-sm, #{$sdp-raio-1});
+  --sdp-raio-2: var(--bs-border-radius, #{$sdp-raio-2});
+  --sdp-raio-3: var(--bs-border-radius-lg, #{$sdp-raio-3});
+  --sdp-sombra-1: var(--bs-box-shadow, #{$sdp-sombra-1});
   --sdp-duracao-rapida: #{$sdp-duracao-rapida};
   --sdp-camada-sticky: #{$sdp-camada-sticky};
   --sdp-navbar-altura-minima: 3.5rem;

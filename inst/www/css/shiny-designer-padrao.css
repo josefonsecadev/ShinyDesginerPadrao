@@ -10,7 +10,7 @@
   --sdp-tipografia-familia-base: var(--bs-body-font-family, system-ui, -apple-system, Segoe UI, sans-serif);
   --sdp-tipografia-tamanho-base: var(--bs-body-font-size, 1rem);
   --sdp-tipografia-peso-controle: 600;
-  --sdp-tipografia-peso-titulo: 700;
+  --sdp-tipografia-peso-titulo: var(--bs-heading-font-weight, 700);
   --sdp-tipografia-altura-linha-base: 1.5;
   --sdp-espaco-0: 0;
   --sdp-espaco-1: 0.25rem;
@@ -18,10 +18,10 @@
   --sdp-espaco-3: 0.75rem;
   --sdp-espaco-4: 1rem;
   --sdp-espaco-5: 1.5rem;
-  --sdp-raio-1: 0.25rem;
-  --sdp-raio-2: 0.5rem;
-  --sdp-raio-3: 0.75rem;
-  --sdp-sombra-1: 0 0.5rem 1.25rem rgba(15, 23, 42, 0.12);
+  --sdp-raio-1: var(--bs-border-radius-sm, 0.25rem);
+  --sdp-raio-2: var(--bs-border-radius, 0.5rem);
+  --sdp-raio-3: var(--bs-border-radius-lg, 0.75rem);
+  --sdp-sombra-1: var(--bs-box-shadow, 0 0.5rem 1.25rem rgba(15, 23, 42, 0.12));
   --sdp-duracao-rapida: 150ms;
   --sdp-camada-sticky: 1020;
   --sdp-navbar-altura-minima: 3.5rem;

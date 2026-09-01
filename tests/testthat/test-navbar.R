@@ -81,3 +81,91 @@ test_that("navbar anexa uma única dependência visual", {
   expect_length(matching, 1)
   expect_identical(matching[[1]]$stylesheet, "css/shiny-designer-padrao.css")
 })
+
+test_that("sdp_theme cria os cinco designers", {
+  designers <- sdp_designers()
+
+  expect_equal(
+    designers$designer,
+    c("executivo", "analitico", "editorial", "produto", "operacoes")
+  )
+  expect_identical(designers$tamanho_base, c(
+    "1rem",
+    "0.9375rem",
+    "1rem",
+    "1rem",
+    "0.9375rem"
+  ))
+  expect_identical(designers$densidade, c(
+    "equilibrada",
+    "alta",
+    "respirada",
+    "equilibrada",
+    "alta"
+  ))
+  expect_true(all(vapply(
+    designers$designer,
+    function(designer) bslib::is_bs_theme(sdp_theme(designer)),
+    logical(1)
+  )))
+})
+
+test_that("sdp_theme configura tokens principais do designer", {
+  theme <- sdp_theme("operacoes")
+
+  expect_identical(attr(theme, "sdp-designer"), "operacoes")
+  expect_identical(bslib::bs_get_variables(theme, "body-bg")[[1]], "#0C1117")
+  expect_identical(bslib::bs_get_variables(theme, "body-color")[[1]], "#E6EDF3")
+  expect_identical(bslib::bs_get_variables(theme, "primary")[[1]], "#58A6FF")
+  expect_identical(
+    bslib::bs_get_variables(theme, "headings-font-family")[[1]],
+    "Roboto, Arial, sans-serif"
+  )
+})
+
+test_that("navbar aceita um designer diretamente", {
+  ui <- navbar(
+    title = "Operações",
+    menu_items = list(inicio = "Monitoramento"),
+    designer = "operacoes"
+  )
+
+  expect_match(as.character(ui), "sdp-navbar")
+})
+
+test_that("sdp_use_designer configura o tema global uma única vez", {
+  previous <- bslib::bs_global_get()
+  on.exit(if (is.null(previous)) {
+    bslib::bs_global_clear()
+  } else {
+    bslib::bs_global_set(previous)
+  }, add = TRUE)
+
+  sdp_use_designer("operacoes")
+
+  expect_identical(sdp_current_designer(), "operacoes")
+  ui <- navbar(
+    title = "Operações",
+    menu_items = list(inicio = "Monitoramento")
+  )
+
+  expect_match(as.character(ui), "sdp-navbar")
+})
+
+test_that("sdp_clear_designer remove o tema global do pacote", {
+  previous <- bslib::bs_global_get()
+  on.exit(if (is.null(previous)) {
+    bslib::bs_global_clear()
+  } else {
+    bslib::bs_global_set(previous)
+  }, add = TRUE)
+
+  sdp_use_designer("produto")
+  sdp_clear_designer()
+
+  expect_null(sdp_current_designer())
+})
+
+test_that("sdp_theme rejeita designer desconhecido", {
+  expect_snapshot(error = TRUE, sdp_theme("inexistente"))
+})
