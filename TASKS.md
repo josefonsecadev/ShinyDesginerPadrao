@@ -246,7 +246,7 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 
 ### TASK-005 — Remover ícones do menu executivo e aproximar as setas dos submenus
 
-- Estado: Aguardando validação
+- Estado: Concluída
 - Categoria principal: CSS
 - Categorias secundárias: Design
 - Esforço: Baixo
@@ -258,12 +258,12 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 - Referência: designer `executivo`, `examples/exemplo_executivo.R`
 - Resultado esperado: exemplo sem ícones nos itens principais e seta visualmente próxima ao nome do grupo com submenu.
 - Dependências: nenhuma.
-- Resultado e arquivos alterados: ícones removidos da configuração do exemplo; acionador executivo usa espaçamento zero entre rótulo e seta, remove a margem do caret e o desloca levemente para alinhar seu centro visual ao texto.
-- Verificações e pendências: CSS recompilado pelo Sass Dart via `npm exec --yes --package=sass`; regra gerada conferida e `git diff --check` sem erros. Servidor ativo e respondendo HTTP 200. Avaliação visual e funcional do usuário pendente.
+- Resultado e arquivos alterados: ícones removidos da configuração do exemplo; acionador executivo usa espaçamento zero entre rótulo e seta, remove a margem do caret e desloca a seta 4 px para baixo, conforme o último ajuste solicitado.
+- Verificações e pendências: CSS recompilado pelo Sass Dart via `npm exec --yes --package=sass`; regra gerada conferida e `git diff --check` sem erros. Servidor ativo e respondendo HTTP 200. Aprovação visual recebida após o ajuste de 4 px.
 - URL de avaliação: http://127.0.0.1:3878/ — servidor R ativo, exemplo executivo atualizado. Execução: `Rscript -e "pkgload::load_all('.'); shiny::runApp('examples/exemplo_executivo.R', host = '127.0.0.1', port = 3878, launch.browser = FALSE)`
-- Validação do usuário: pendente
-- Aprovação da task: pendente
-- Entrega Git: pendente de implementação, aceite e aprovação explícita
+- Validação do usuário: aprovado em 30/10/2026
+- Aprovação da task: explícita em 30/10/2026
+- Entrega Git: commit e push desta task em execução
 - Commit e destino: pendente
 
 #### Critérios de aceite e análise de cumprimento
@@ -271,9 +271,9 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 | Critério / resultado esperado | Plano de verificação | Evidência e resultado | Situação |
 | --- | --- | --- | --- |
 | CA-01 — O exemplo executivo não exibe ícones nos itens principais do menu. | Conferir configuração e validar o exemplo renderizado. | Campos `icon` removidos de Visão geral, Desempenho e Relatórios; HTML servido contém os rótulos e o caret sem ícones. | Atendido |
-| CA-02 — A seta do grupo com submenu aparece próxima do nome e centralizada na altura do texto. | Validar visualmente o acionador de submenu no exemplo ativo. | DOM servido mostra caret como elemento `<b class="caret">`; regra executiva remove lacuna flexível e margem, com deslocamento vertical baseado em token de espaçamento; avaliação visual pendente. | Não verificado |
+| CA-02 — A seta do grupo com submenu aparece próxima do nome e centralizada na altura do texto. | Validar visualmente o acionador de submenu no exemplo ativo. | DOM servido mostra caret como elemento `<b class="caret">`; regra executiva remove lacuna flexível e margem e aplica deslocamento vertical de `--sdp-espaco-1`; usuário aprovou a posição visual após o ajuste. | Atendido |
 
-- Conclusão: Aguardando validação do usuário. Para avaliar, abra o exemplo executivo ativo, confira os itens principais sem ícones e o acionador Desempenho com sua seta próxima ao nome; a aprovação visual e funcional permanece pendente.
+- Conclusão: Cumprimento comprovado; critérios técnicos e validação visual do usuário atendidos.
 
 
 ### TASK-006 — Padronizar UTF-8 e corrigir a exibição de “José”

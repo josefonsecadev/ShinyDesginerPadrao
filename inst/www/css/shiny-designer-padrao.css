@@ -263,7 +263,7 @@
 
 .sdp-navbar[data-sdp-designer=executivo] .navbar-nav .dropdown-toggle > .caret {
   margin-inline-start: 0;
-  transform: translateY(calc(var(--sdp-espaco-1) / 2));
+  transform: translateY(var(--sdp-espaco-1));
 }
 
 .sdp-navbar .navbar-nav > li > a:hover,
