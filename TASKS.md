@@ -377,7 +377,7 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 
 ### TASK-009 — Criar um rodapé discreto no fim real da página executiva
 
-- Estado: Cadastrada
+- Estado: Concluída
 - Categoria principal: UI / Componentes
 - Categorias secundárias: Design, CSS
 - Esforço: Baixo
@@ -389,22 +389,22 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 - Referência: designer `executivo`, `examples/exemplo_executivo.R`
 - Resultado esperado: rodapé visualmente simples, sem conteúdo inicial, que só apareça ao chegar ao fim do conteúdo e não fique preso à janela.
 - Dependências: TASK-007 e TASK-008, para manter coerência com o cabeçalho e sua rolagem.
-- Resultado e arquivos alterados: tarefa cadastrada; nenhuma implementação iniciada.
-- Verificações e pendências: confirmar altura menor que a do cabeçalho, correspondência da superfície, ordem no documento e ausência de posicionamento fixo ou sticky.
-- URL de avaliação: não aplicável até a execução
-- Validação do usuário: pendente
-- Aprovação da task: pendente
-- Entrega Git: pendente de implementação, aceite e aprovação explícita
+- Resultado e arquivos alterados: `R/footer.R` contém o helper independente do rodapé e `R/navbar.R` apenas o compõe no fim da página executiva; `inst/scss/components/_footer.scss` define altura menor que o cabeçalho e fundo via tokens e é importado no entrypoint Sass; CSS compilado atualizado.
+- Verificações e pendências: `git diff --check` passou; CSS compilado; servidor responde HTTP 200; HTML coloca o rodapé após o último painel e antes do fechamento do `body`; regra CSS não define `fixed` nem `sticky`. Usuário aprovou o resultado em 30/10/2026.
+- URL de avaliação: http://127.0.0.1:3878/ — servidor R ativo, designer executivo. Execução: `Rscript -e "pkgload::load_all('.'); shiny::runApp('examples/exemplo_executivo.R', host = '127.0.0.1', port = 3878, launch.browser = FALSE)"`
+- Validação do usuário: aprovado em 30/10/2026
+- Aprovação da task: explícita em 30/10/2026
+- Entrega Git: commit e push desta task em execução
 - Commit e destino: pendente
 
 #### Critérios de aceite e análise de cumprimento
 
 | Critério / resultado esperado | Plano de verificação | Evidência e resultado | Situação |
 | --- | --- | --- | --- |
-| CA-01 — O rodapé é mais fino que o cabeçalho, começa vazio e usa a mesma cor de fundo. | Conferir dimensões, conteúdo inicial e tokens de superfície no exemplo executivo. | A implementar e validar. | Não verificado |
-| CA-02 — O rodapé aparece apenas depois do conteúdo da página e não acompanha a janela. | Rolar o exemplo do topo ao fim e verificar a posição do rodapé em relação ao conteúdo e viewport. | A implementar e validar. | Não verificado |
+| CA-01 — O rodapé é mais fino que o cabeçalho, começa vazio e usa a mesma cor de fundo. | Conferir dimensões, conteúdo inicial e tokens de superfície no exemplo executivo. | Markup vazio; SCSS usa `--sdp-espaco-3` e o token de fundo do navbar executivo; usuário aprovou. | Atendido |
+| CA-02 — O rodapé aparece apenas depois do conteúdo da página e não acompanha a janela. | Rolar o exemplo do topo ao fim e verificar a posição do rodapé em relação ao conteúdo e viewport. | HTML coloca o rodapé depois do último painel e antes de `</body>`; CSS não define `fixed` ou `sticky`; usuário aprovou. | Atendido |
 
-- Conclusão: Cadastrada; não iniciar até solicitação do usuário.
+- Conclusão: Cumprimento comprovado; estrutura, tokens, resposta HTTP e aprovação do usuário registrados.
 
 
 ### TASK-010 — Aplicar famílias tipográficas por função no designer executivo

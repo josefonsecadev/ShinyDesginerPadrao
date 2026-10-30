@@ -172,6 +172,9 @@ navbar <- function(
     if (isTRUE(contact)) {
       page_query$find(".navbar-header")$append(contact_button)
     }
+    page_query$find(".sdp-navbar")$parent("body")$append(
+      sdp_footer_ui(designer_name)
+    )
     page <- page_query$allTags()
   }
 

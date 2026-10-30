@@ -1,5 +1,7 @@
 # ShinyDesginerPadrao (development version)
 
+* `navbar()` inclui um rodapé vazio no fim da página executiva, com altura e
+  superfície derivadas de tokens (TASK-009).
 * O projeto orienta a gravação de arquivos de texto em UTF-8 e corrige o locale
   POSIX incompatível herdado pelo R no Windows.
 * `navbar()` posiciona o contato junto ao título e desenha uma curva discreta
