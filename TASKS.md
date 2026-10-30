@@ -459,8 +459,8 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 - URL de avaliação: http://127.0.0.1:3878/ — servidor R ativo, designer executivo. Execução: `Rscript -e "pkgload::load_all('.'); shiny::runApp('examples/exemplo_executivo.R', host = '127.0.0.1', port = 3878, launch.browser = FALSE)"`
 - Validação do usuário: aprovado em 30/10/2026
 - Aprovação da task: explícita em 30/10/2026
-- Entrega Git: commit e push desta task em execução
-- Commit e destino: pendente
+- Entrega Git: commit criado e push confirmado
+- Commit e destino: `1219b1b` enviado para `origin/master`
 
 #### Critérios de aceite e análise de cumprimento
 
