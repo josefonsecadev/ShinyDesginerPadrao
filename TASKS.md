@@ -263,8 +263,8 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 - URL de avaliação: http://127.0.0.1:3878/ — servidor R ativo, exemplo executivo atualizado. Execução: `Rscript -e "pkgload::load_all('.'); shiny::runApp('examples/exemplo_executivo.R', host = '127.0.0.1', port = 3878, launch.browser = FALSE)`
 - Validação do usuário: aprovado em 30/10/2026
 - Aprovação da task: explícita em 30/10/2026
-- Entrega Git: commit e push desta task em execução
-- Commit e destino: pendente
+- Entrega Git: commit criado e push confirmado
+- Commit e destino: `93452fd` em `origin/master`
 
 #### Critérios de aceite e análise de cumprimento
 
@@ -278,7 +278,7 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 
 ### TASK-006 — Padronizar UTF-8 e corrigir a exibição de “José”
 
-- Estado: Aguardando validação
+- Estado: Concluída
 - Categoria principal: Infraestrutura
 - Categorias secundárias: Qualidade
 - Esforço: Baixo
@@ -292,12 +292,12 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 - Resultado esperado: editores e ferramentas do projeto preservam UTF-8, e o nome “José” é exibido corretamente nas saídas afetadas.
 - Dependências: nenhuma.
 - Resultado e arquivos alterados: configuração `.editorconfig` criada para orientar a gravação UTF-8 dos arquivos de texto e metadados; `.Rprofile` remove o locale POSIX `C.UTF-8` inválido herdado pelo R no Windows e reaplica o locale do sistema.
-- Verificações e pendências: `.Rprofile` confirmou locale UTF-8 e saída correta de “José”; varredura estrita sem arquivos inválidos. R ainda emite avisos antes de carregar `.Rprofile`, por causa do `C.UTF-8` externo; confirmação do usuário sobre a saída afetada pendente.
+- Verificações e pendências: revalidação em R 4.6.1 confirmou `UTF8=TRUE`, locale `Portuguese_Brazil.utf8` e saída `José`; varredura estrita de 72 arquivos sem inválidos. Avisos iniciais do `C.UTF-8` externo aparecem antes de `.Rprofile`.
 - URL de avaliação: não aplicável até a execução
-- Validação do usuário: quando aplicável
-- Aprovação da task: pendente
-- Entrega Git: pendente de implementação, aceite e aprovação explícita
-- Commit e destino: pendente
+- Validação do usuário: aprovado em 30/10/2026
+- Aprovação da task: explícita em 30/10/2026
+- Entrega Git: implementação incluída em commit agregado; aceite desta task em registro
+- Commit e destino: `171f5a2` em `origin/master`
 
 #### Critérios de aceite e análise de cumprimento
 
@@ -305,9 +305,9 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 | --- | --- | --- | --- |
 | CA-01 — A política do repositório instrui editores a salvar arquivos de texto em UTF-8. | Revisar a configuração compartilhada de encoding e conferir que não conflita com arquivos binários ou o fluxo R. | `.editorconfig` declara UTF-8 para fontes, documentos e metadados; `DESCRIPTION` também declara `Encoding: UTF-8`. | Atendido |
 | CA-02 — Os arquivos de texto do projeto podem ser decodificados como UTF-8 sem perda. | Fazer varredura estrita dos arquivos de texto incluídos no escopo e registrar exceções. | Varredura estrita de 72 arquivos de texto: nenhum inválido em UTF-8. | Atendido |
-| CA-03 — “José” aparece corretamente, sem escape `<U+00E9>`, no contexto que apresenta o problema. | Reproduzir a saída no R/Windows e no app aplicável, corrigir a origem e repetir a reprodução. | Com R 4.6.1 no Windows, após `.Rprofile`, `l10n_info()[["UTF-8"]]` é `TRUE` e a saída é `José`; avisos iniciais do locale externo ainda aparecem antes de o perfil ser aplicado. Confirmação no contexto original pendente. | Atendido |
+| CA-03 — “José” aparece corretamente, sem escape `<U+00E9>`, no contexto que apresenta o problema. | Reproduzir a saída no R/Windows e no app aplicável, corrigir a origem e repetir a reprodução. | Com R 4.6.1 no Windows, após `.Rprofile`, `l10n_info()[["UTF-8"]]` é `TRUE` e a saída é `José`; o usuário aprovou a correção no contexto afetado. Avisos iniciais do locale externo ainda aparecem antes do perfil. | Atendido |
 
-- Conclusão: Aguardando validação do usuário sobre a correção do escape no contexto em que ocorreu.
+- Conclusão: Cumprimento comprovado; varredura UTF-8, saída corrigida no R/Windows e aprovação do usuário registradas.
 
 
 ### TASK-007 — Alinhar “Sobre mim” ao menu e incluir curva de dados no cabeçalho executivo
