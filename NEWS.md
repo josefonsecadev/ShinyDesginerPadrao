@@ -2,6 +2,9 @@
 
 * `navbar()` inclui um rodapé vazio no fim da página executiva, com altura e
   superfície derivadas de tokens (TASK-009).
+* `navbar()` aceita `footer_left` e `footer_right` para configurar o rodapé do
+  designer executivo; o exemplo aplica os textos de propriedade e áreas de
+  atuação com a tipografia IBM Plex Mono (TASK-012).
 * O projeto orienta a gravação de arquivos de texto em UTF-8 e corrige o locale
   POSIX incompatível herdado pelo R no Windows.
 * `navbar()` oferece um controle Light/Dark no designer executivo, com paleta

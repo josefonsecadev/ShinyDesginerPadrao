@@ -17,7 +17,9 @@ navbar(
   pags = NULL,
   designer = NULL,
   contact = TRUE,
-  ...
+  ...,
+  footer_left = NULL,
+  footer_right = NULL
 )
 }
 \arguments{
@@ -52,6 +54,12 @@ substitui \code{theme}.}
 exibido ao final da barra.}
 
 \item{...}{Argumentos adicionais enviados para \code{\link[bslib:page_navbar]{bslib::page_navbar()}}.}
+
+\item{footer_left}{Conteúdo opcional alinhado à esquerda no rodapé do
+designer executivo.}
+
+\item{footer_right}{Conteúdo opcional alinhado à direita no rodapé do
+designer executivo.}
 }
 \value{
 Um objeto de interface do Shiny.

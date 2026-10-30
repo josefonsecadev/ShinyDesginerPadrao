@@ -476,7 +476,7 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 
 ### TASK-012 — Adicionar informações configuráveis ao rodapé executivo
 
-- Estado: Cadastrada
+- Estado: Concluída
 - Categoria principal: UI / Componentes
 - Categorias secundárias: Design, CSS, Documentação
 - Esforço: Baixo
@@ -488,24 +488,24 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 - Referência: designer `executivo`, `examples/exemplo_executivo.R`; configurar o conteúdo explicitamente para preservar o padrão vazio de componentes reutilizáveis.
 - Resultado esperado: bloco esquerdo `® 2026 José Fonseca. Todos os direitos reservados. Propriedade intelectual integral de José Ferreira.`; bloco direito `Ciência de Dados . Engenharia de Dados . R . Python`; ambos usam a família `"IBM Plex Mono", ui-monospace, "Cascadia Mono", monospace`, alinhados nas extremidades do rodapé e com adaptação para telas estreitas.
 - Dependências: TASK-009, para preencher o rodapé implementado; TASK-010, para reutilizar o token monoespaçado centralizado.
-- Resultado e arquivos alterados: tarefa cadastrada; nenhuma implementação iniciada.
-- Verificações e pendências: conferir conteúdo UTF-8 e ordem de leitura, alinhamento nas extremidades, tipografia por token e quebra responsiva; avaliar visual e funcionalmente o exemplo executivo.
-- URL de avaliação: não aplicável até a execução
-- Validação do usuário: pendente
-- Aprovação da task: pendente
-- Entrega Git: pendente de implementação, aceite e aprovação explícita
+- Resultado e arquivos alterados: `navbar()` aceita `footer_left` e `footer_right`; o exemplo executivo configura os dois textos. `R/footer.R` renderiza os blocos sem estilo inline e mantém o rodapé vazio acessível como oculto; `inst/scss/components/_footer.scss` aplica o token monoespaçado e layout responsivo; documentação Roxygen, `man/navbar.Rd`, CSS e NEWS atualizados.
+- Verificações e pendências: Sass compilado; `devtools::document()` concluído; conferência do HTML confirmou textos UTF-8 exatos, ordem esquerda-direita, padrão vazio e ausência de estilos inline no footer. Página e CSS responderam HTTP 200 e as regras de fonte e quebra responsiva foram encontradas no CSS servido. Validação visual pendente.
+- URL de avaliação: http://127.0.0.1:3878/ — servidor R ativo, designer executivo. Execução: `Rscript -e "pkgload::load_all('.'); shiny::runApp('examples/exemplo_executivo.R', host = '127.0.0.1', port = 3878, launch.browser = FALSE)"`
+- Validação do usuário: aprovado em 30/10/2026
+- Aprovação da task: explícita em 30/10/2026
+- Entrega Git: commit e push desta task em execução
 - Commit e destino: pendente
 
 #### Critérios de aceite e análise de cumprimento
 
 | Critério / resultado esperado | Plano de verificação | Evidência e resultado | Situação |
 | --- | --- | --- | --- |
-| CA-01 — O bloco esquerdo mostra integralmente o texto de propriedade solicitado, com `®` e acentuação correta. | Conferir o HTML renderizado e avaliar a legibilidade no rodapé executivo. | A implementar e validar. | Não verificado |
-| CA-02 — O bloco direito mostra `Ciência de Dados . Engenharia de Dados . R . Python` e fica alinhado à direita. | Conferir o HTML e o alinhamento no exemplo executivo em larguras larga e estreita. | A implementar e validar. | Não verificado |
-| CA-03 — Os blocos usam IBM Plex Mono com os fallbacks indicados por meio do token monoespaçado do pacote. | Conferir o token aplicado e verificar a quebra do conteúdo sem sobreposição em telas estreitas. | A implementar e validar. | Não verificado |
-| CA-04 — O conteúdo pessoal é configurado explicitamente no exemplo e não vira padrão de `navbar()` nem de outros consumidores. | Revisar defaults da API e a configuração do exemplo executivo. | A implementar e validar. | Não verificado |
+| CA-01 — O bloco esquerdo mostra integralmente o texto de propriedade solicitado, com `®` e acentuação correta. | Conferir o HTML renderizado e avaliar a legibilidade no rodapé executivo. | HTTP 200 e HTML contêm exatamente o texto configurado em UTF-8; legibilidade visual aprovada pelo usuário. | Atendido |
+| CA-02 — O bloco direito mostra `Ciência de Dados . Engenharia de Dados . R . Python` e fica alinhado à direita. | Conferir o HTML e o alinhamento no exemplo executivo em larguras larga e estreita. | Texto exato presente no HTML; desktop usa `space-between` e alinhamento à direita, regra responsiva empilha e alinha à esquerda; aparência aprovada pelo usuário. | Atendido |
+| CA-03 — Os blocos usam IBM Plex Mono com os fallbacks indicados por meio do token monoespaçado do pacote. | Conferir o token aplicado e verificar a quebra do conteúdo sem sobreposição em telas estreitas. | CSS servido aponta para `--sdp-tipografia-familia-mono`; o token usa o `code_font` do preset executivo com IBM Plex Mono e fallbacks. Regra de quebra responsiva presente; implementação aprovada pelo usuário. | Atendido |
+| CA-04 — O conteúdo pessoal é configurado explicitamente no exemplo e não vira padrão de `navbar()` nem de outros consumidores. | Revisar defaults da API e a configuração do exemplo executivo. | `footer_left` e `footer_right` têm padrão `NULL`; textos são passados apenas pelo exemplo. Smoke check confirmou rodapé padrão vazio, oculto para tecnologias assistivas e sem estilo inline próprio. | Atendido |
 
-- Conclusão: Cadastrada; não iniciar até solicitação do usuário e cumprimento das dependências.
+- Conclusão: Cumprimento comprovado; conteúdo, ordem, tipografia, comportamento responsivo e validação visual do usuário atendidos.
 
 
 ### TASK-013 — Aplicar gradiente ao título do dashboard executivo

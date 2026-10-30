@@ -25,6 +25,10 @@
 #'   substitui `theme`.
 #' @param contact Lógico que indica se o botão estático “Sobre mim” deve ser
 #'   exibido ao final da barra.
+#' @param footer_left Conteúdo opcional alinhado à esquerda no rodapé do
+#'   designer executivo.
+#' @param footer_right Conteúdo opcional alinhado à direita no rodapé do
+#'   designer executivo.
 #' @param ... Argumentos adicionais enviados para [bslib::page_navbar()].
 #'
 #' @return Um objeto de interface do Shiny.
@@ -63,7 +67,9 @@ navbar <- function(
     pags = NULL,
     designer = NULL,
     contact = TRUE,
-    ...) {
+    ...,
+    footer_left = NULL,
+    footer_right = NULL) {
   if (!is.null(designer)) {
     theme <- sdp_theme(designer)
   }
@@ -181,7 +187,11 @@ navbar <- function(
       page_query$find(".navbar-header")$append(contact_button)
     }
     page_query$find(".sdp-navbar")$parent("body")$append(
-      sdp_footer_ui(designer_name)
+      sdp_footer_ui(
+        designer_name,
+        left = footer_left,
+        right = footer_right
+      )
     )
     page <- page_query$allTags()
   }

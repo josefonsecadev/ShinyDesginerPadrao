@@ -29,7 +29,12 @@ menu_items <- list(
 ui <- ShinyDesginerPadrao::navbar(
   title = "Dashboard Executivo",
   menu_items = menu_items,
-  selected = "visao_geral"
+  selected = "visao_geral",
+  footer_left = paste(
+    "® 2026 José Fonseca. Todos os direitos reservados.",
+    "Propriedade intelectual integral de José Ferreira."
+  ),
+  footer_right = "Ciência de Dados . Engenharia de Dados . R . Python"
 )
 
 server <- function(input, output, session) {
