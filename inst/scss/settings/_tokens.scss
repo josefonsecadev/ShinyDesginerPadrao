@@ -42,6 +42,12 @@
 [data-sdp-designer="executivo"] {
   --sdp-navbar-espaco-vertical: var(--sdp-espaco-4);
   --sdp-navbar-titulo-tamanho: #{$sdp-fonte-tamanho-titulo-navbar};
+  --sdp-navbar-titulo-gradiente: linear-gradient(
+    110deg,
+    rgb(27, 77, 155) 0%,
+    rgb(63, 114, 201) 42%,
+    rgb(244, 146, 63) 100%
+  );
   --sdp-navbar-borda-largura: #{$sdp-borda-fina};
   --sdp-tema-navbar-cor-submenu-fundo: var(--bs-body-bg);
   --sdp-tema-navbar-cor-fundo: color-mix(in srgb, var(--bs-body-bg) 96%, var(--bs-body-color));

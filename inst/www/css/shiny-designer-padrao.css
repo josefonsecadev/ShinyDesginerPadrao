@@ -41,6 +41,12 @@
 [data-sdp-designer=executivo] {
   --sdp-navbar-espaco-vertical: var(--sdp-espaco-4);
   --sdp-navbar-titulo-tamanho: 2rem;
+  --sdp-navbar-titulo-gradiente: linear-gradient(
+    110deg,
+    rgb(27, 77, 155) 0%,
+    rgb(63, 114, 201) 42%,
+    rgb(244, 146, 63) 100%
+  );
   --sdp-navbar-borda-largura: 1px;
   --sdp-tema-navbar-cor-submenu-fundo: var(--bs-body-bg);
   --sdp-tema-navbar-cor-fundo: color-mix(in srgb, var(--bs-body-bg) 96%, var(--bs-body-color));
@@ -671,8 +677,36 @@
   overflow-wrap: anywhere;
   text-overflow: clip;
   white-space: normal;
+  color: var(--sdp-navbar-cor-texto);
 }
 
+@supports (background-clip: text) {
+  .sdp-navbar[data-sdp-designer=executivo] .sdp-navbar__title {
+    background-image: var(--sdp-navbar-titulo-gradiente);
+    background-clip: text;
+    color: transparent;
+  }
+}
+@supports (-webkit-background-clip: text) {
+  .sdp-navbar[data-sdp-designer=executivo] .sdp-navbar__title {
+    background-image: var(--sdp-navbar-titulo-gradiente);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+[data-sdp-color-mode=dark] .sdp-navbar[data-sdp-designer=executivo] .sdp-navbar__title {
+  background-image: none;
+  color: var(--sdp-navbar-cor-texto);
+  -webkit-text-fill-color: currentColor;
+}
+
+@media (forced-colors: active) {
+  .sdp-navbar[data-sdp-designer=executivo] .sdp-navbar__title {
+    background-image: none;
+    color: CanvasText;
+    -webkit-text-fill-color: CanvasText;
+  }
+}
 .sdp-navbar[data-sdp-designer=executivo] .navbar-nav > li > .nav-link.active,
 .sdp-navbar[data-sdp-designer=executivo] .navbar-nav > li.active > .nav-link {
   color: var(--sdp-navbar-cor-item-ativo);

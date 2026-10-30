@@ -465,6 +465,37 @@
   overflow-wrap: anywhere;
   text-overflow: clip;
   white-space: normal;
+  color: var(--sdp-navbar-cor-texto);
+}
+
+@supports (background-clip: text) {
+  .sdp-navbar[data-sdp-designer="executivo"] .sdp-navbar__title {
+    background-image: var(--sdp-navbar-titulo-gradiente);
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+@supports (-webkit-background-clip: text) {
+  .sdp-navbar[data-sdp-designer="executivo"] .sdp-navbar__title {
+    background-image: var(--sdp-navbar-titulo-gradiente);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+[data-sdp-color-mode="dark"] .sdp-navbar[data-sdp-designer="executivo"] .sdp-navbar__title {
+  background-image: none;
+  color: var(--sdp-navbar-cor-texto);
+  -webkit-text-fill-color: currentColor;
+}
+
+@media (forced-colors: active) {
+  .sdp-navbar[data-sdp-designer="executivo"] .sdp-navbar__title {
+    background-image: none;
+    color: CanvasText;
+    -webkit-text-fill-color: CanvasText;
+  }
 }
 
 .sdp-navbar[data-sdp-designer="executivo"] .navbar-nav > li > .nav-link.active,

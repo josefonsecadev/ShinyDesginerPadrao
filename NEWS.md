@@ -5,6 +5,8 @@
 * `navbar()` aceita `footer_left` e `footer_right` para configurar o rodapé do
   designer executivo; o exemplo aplica os textos de propriedade e áreas de
   atuação com a tipografia IBM Plex Mono (TASK-012).
+* `navbar()` aplica o gradiente informado ao título do designer executivo e
+  preserva texto sólido de alto contraste no modo escuro (TASK-013).
 * O projeto orienta a gravação de arquivos de texto em UTF-8 e corrige o locale
   POSIX incompatível herdado pelo R no Windows.
 * `navbar()` oferece um controle Light/Dark no designer executivo, com paleta
