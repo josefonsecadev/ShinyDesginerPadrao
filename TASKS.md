@@ -576,7 +576,7 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 
 ### TASK-015 — Enriquecer o fundo decorativo do cabeçalho executivo
 
-- Estado: Aprovada — envio pendente
+- Estado: Concluída
 - Categoria principal: Design
 - Categorias secundárias: UI / Componentes, CSS, Acessibilidade
 - Esforço: Baixo
@@ -593,8 +593,8 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 - URL de avaliação: http://127.0.0.1:3878/ — servidor R ativo, designer executivo. Execução: `Rscript -e "pkgload::load_all('.'); shiny::runApp('examples/exemplo_executivo.R', host = '127.0.0.1', port = 3878, launch.browser = FALSE)"`
 - Validação do usuário: dispensada; aprovação automática autorizada em 30/10/2026
 - Aprovação da task: automática conforme autorização do usuário em 30/10/2026
-- Entrega Git: implementação concluída; commit/push desta tarefa em execução
-- Commit e destino: pendente
+- Entrega Git: commit e push concluídos
+- Commit e destino: `1f4808e` em `origin/master`
 
 #### Critérios de aceite e análise de cumprimento
 
@@ -609,7 +609,7 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 
 ### TASK-016 — Adicionar linha divisória entre a página e o rodapé
 
-- Estado: Cadastrada
+- Estado: Aprovada — envio pendente
 - Categoria principal: CSS
 - Categorias secundárias: Design
 - Esforço: Baixo
@@ -621,22 +621,22 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 - Referência: designer `executivo`, `examples/exemplo_executivo.R`; rodapé criado na TASK-009 e preenchido na TASK-012.
 - Resultado esperado: separação visível no limite entre conteúdo e rodapé, usando tokens de borda e mantendo o posicionamento do rodapé no fim real da página em temas claro e escuro.
 - Dependências: TASK-009 e TASK-012, para a estrutura e o conteúdo do rodapé.
-- Resultado e arquivos alterados: tarefa cadastrada; nenhuma implementação iniciada.
-- Verificações e pendências: avaliar a linha, contraste e posição no exemplo executivo em telas largas e estreitas e nos modos claro e escuro.
-- URL de avaliação: não aplicável até a execução
-- Validação do usuário: pendente
-- Aprovação da task: pendente
-- Entrega Git: pendente de implementação, aceite e aprovação explícita
+- Resultado e arquivos alterados: `inst/scss/components/_footer.scss` adiciona uma borda superior fina ao rodapé executivo, com cor de borda do tema e a largura fina já tokenizada; o CSS compilado é publicado em `inst/www/css/shiny-designer-padrao.css`.
+- Verificações e pendências: Sass compilado via `npx sass`; CSS compilado contém a borda superior usando tokens; `git diff --check` aprovado; a página e o CSS servidos respondem HTTP 200. Validação visual dispensada pelo usuário em 30/10/2026.
+- URL de avaliação: http://127.0.0.1:3878/ — servidor R ativo, designer executivo. Execução: `Rscript -e "pkgload::load_all('.'); shiny::runApp('examples/exemplo_executivo.R', host = '127.0.0.1', port = 3878, launch.browser = FALSE)`
+- Validação do usuário: dispensada; aprovação automática autorizada em 30/10/2026
+- Aprovação da task: automática conforme autorização do usuário em 30/10/2026
+- Entrega Git: implementação concluída; commit/push desta tarefa em execução
 - Commit e destino: pendente
 
 #### Critérios de aceite e análise de cumprimento
 
 | Critério / resultado esperado | Plano de verificação | Evidência e resultado | Situação |
 | --- | --- | --- | --- |
-| CA-01 — Uma linha discreta separa o conteúdo principal do rodapé executivo. | Conferir a borda no limite entre página e rodapé no exemplo. | A implementar e validar. | Não verificado |
-| CA-02 — A linha usa tokens e permanece visível em temas claro e escuro sem alterar a posição do rodapé. | Revisar o SCSS e conferir a separação e o fim real da página em ambos os temas. | A implementar e validar. | Não verificado |
+| CA-01 — Uma linha discreta separa o conteúdo principal do rodapé executivo. | Conferir a borda superior no seletor do rodapé executivo e no CSS servido. | `border-top` fino presente no rodapé executivo e publicado no CSS; página e folha de estilos responderam HTTP 200. Validação visual dispensada pelo usuário. | Atendido |
+| CA-02 — A linha usa tokens e permanece visível em temas claro e escuro sem alterar a posição do rodapé. | Revisar tokens de largura/cor e confirmar que somente a borda é adicionada ao módulo do rodapé. | Largura e cor vêm dos tokens da borda do cabeçalho/tema; o rodapé continua no fluxo normal com apenas a borda superior adicionada. Validação visual dispensada pelo usuário. | Atendido |
 
-- Conclusão: Cadastrada; aguardar a execução da sequência e solicitação do usuário.
+- Conclusão: Critérios técnicos atendidos; validação visual dispensada e aprovação automática autorizada pelo usuário. Commit e push pendentes.
 
 
 ## Rodada atual de ajustes — aguardando avaliação

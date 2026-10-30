@@ -856,9 +856,11 @@
 .sdp-footer[data-sdp-designer=executivo] {
   --sdp-footer-altura: var(--sdp-espaco-3);
   --sdp-footer-cor-fundo: var(--sdp-tema-navbar-cor-fundo, var(--sdp-cor-superficie-elevada));
+  --sdp-footer-cor-borda: var(--sdp-tema-navbar-cor-borda, var(--sdp-cor-borda-padrao));
   --sdp-footer-cor-texto: var(--sdp-cor-texto-secundario);
   --sdp-footer-familia-fonte: var(--sdp-tipografia-familia-mono);
   min-height: var(--sdp-footer-altura);
+  border-top: var(--sdp-navbar-borda-largura) solid var(--sdp-footer-cor-borda);
   background-color: var(--sdp-footer-cor-fundo);
 }
 
