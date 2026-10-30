@@ -2,8 +2,8 @@
 
 * O projeto orienta a gravação de arquivos de texto em UTF-8 e corrige o locale
   POSIX incompatível herdado pelo R no Windows.
-* `navbar()` alinha o contato ao fim da linha de menus e desenha uma curva
-  discreta de dados no cabeçalho executivo (TASK-007).
+* `navbar()` posiciona o contato junto ao título e desenha uma curva discreta
+  de dados no cabeçalho executivo (TASK-007).
 * O exemplo executivo deixa os menus sem ícones e aproxima as setas dos nomes
   dos grupos de submenu (TASK-005).
 * `navbar()` diferencia a superfície dos submenus no designer executivo e

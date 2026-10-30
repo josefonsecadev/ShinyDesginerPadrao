@@ -134,7 +134,8 @@ navbar <- function(
     )
   }
 
-  if (length(right_items) > 0 || isTRUE(contact)) {
+  if (length(right_items) > 0 ||
+      (isTRUE(contact) && !identical(designer_name, "executivo"))) {
     navbar_items <- c(
       navbar_items,
       list(bslib::nav_spacer())
@@ -147,7 +148,7 @@ navbar <- function(
       )
     }
 
-    if (isTRUE(contact)) {
+    if (isTRUE(contact) && !identical(designer_name, "executivo")) {
       navbar_items <- c(
         navbar_items,
         list(bslib::nav_item(contact_button))
@@ -162,8 +163,14 @@ navbar <- function(
 
   if (identical(designer_name, "executivo")) {
     page_query <- htmltools::tagQuery(page)
+    if (isTRUE(contact)) {
+      page_query$find(".sdp-navbar__contact")$parent("li")$remove()
+    }
     if (!is.null(data_pattern)) {
       page_query$find(".navbar-header")$append(data_pattern)
+    }
+    if (isTRUE(contact)) {
+      page_query$find(".navbar-header")$append(contact_button)
     }
     page <- page_query$allTags()
   }

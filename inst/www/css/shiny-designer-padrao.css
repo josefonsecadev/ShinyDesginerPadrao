@@ -545,8 +545,12 @@
   z-index: 1;
 }
 
-.sdp-navbar[data-sdp-designer=executivo] .navbar-nav .sdp-navbar__contact {
+.sdp-navbar[data-sdp-designer=executivo] .navbar-header > .sdp-navbar__contact {
+  position: relative;
+  order: 2;
+  flex: 0 0 auto;
   margin-inline-start: auto;
+  z-index: 1;
 }
 
 .sdp-navbar[data-sdp-designer=executivo] .sdp-navbar__data-pattern {

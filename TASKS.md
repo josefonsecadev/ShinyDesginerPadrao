@@ -310,9 +310,9 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 - Conclusão: Cumprimento comprovado; varredura UTF-8, saída corrigida no R/Windows e aprovação do usuário registradas.
 
 
-### TASK-007 — Alinhar “Sobre mim” ao menu e incluir curva de dados no cabeçalho executivo
+### TASK-007 — Posicionar “Sobre mim” no topo e incluir curva de dados no cabeçalho executivo
 
-- Estado: Aguardando validação
+- Estado: Concluída
 - Categoria principal: Design
 - Categorias secundárias: UI / Componentes, CSS
 - Esforço: Baixo
@@ -320,26 +320,26 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 - Confiança da estimativa: média
 - Demanda de origem: Refinamento do cabeçalho solicitado em 30/10/2026
 - Prioridade: sequência sugerida pelo número da task
-- Objetivo: Alinhar “Sobre mim” à linha dos menus, no extremo direito, e acrescentar uma curva senoidal discreta que remeta a dados na faixa superior.
+- Objetivo: Posicionar “Sobre mim” na faixa superior do cabeçalho, acima do alternador Light/Dark, e acrescentar uma curva senoidal discreta que remeta a dados.
 - Referência: designer `executivo`, `examples/exemplo_executivo.R`; sem dependência de Figma
-- Resultado esperado: botão de contato na mesma linha dos menus, à direita; motivo de dados sutil na faixa superior, derivado do tema e sem competir com os menus.
+- Resultado esperado: botão de contato junto ao título na faixa superior; motivo de dados sutil nessa faixa, derivado do tema e sem competir com os menus.
 - Dependências: nenhuma; refinamento solicitado diretamente para a base executiva.
-- Resultado e arquivos alterados: `R/navbar.R` mantém o botão na navegação; SCSS alinha o contato à direita da linha dos menus; curva senoidal com pontos permanece na faixa superior e usa token executivo; CSS compilado e NEWS atualizada.
-- Verificações e pendências: CSS compilado e `git diff --check` sem erros; exemplo atualizado responde HTTP 200; HTML coloca o contato após o espaçador da navegação e mantém a curva no cabeçalho. Interação do botão e avaliação visual desktop/móvel pendentes.
+- Resultado e arquivos alterados: `R/navbar.R` move o contato para a faixa superior em markup separado do link da marca; curva senoidal com pontos usa token executivo; CSS compilado e NEWS atualizada.
+- Verificações e pendências: exemplo responde HTTP 200; HTML coloca contato e curva antes de `navbar-collapse`, preserva `id="abrir_contato"` e não deixa espaçador vazio na linha dos menus. Usuário aprovou a composição visual.
 - URL de avaliação: http://127.0.0.1:3878/ — servidor R ativo, designer executivo. Execução: `Rscript -e "pkgload::load_all('.'); shiny::runApp('examples/exemplo_executivo.R', host = '127.0.0.1', port = 3878, launch.browser = FALSE)`
-- Validação do usuário: pendente
-- Aprovação da task: pendente
-- Entrega Git: pendente de implementação, aceite e aprovação explícita
+- Validação do usuário: aprovado em 30/10/2026
+- Aprovação da task: explícita em 30/10/2026
+- Entrega Git: commit e push desta task em execução
 - Commit e destino: pendente
 
 #### Critérios de aceite e análise de cumprimento
 
 | Critério / resultado esperado | Plano de verificação | Evidência e resultado | Situação |
 | --- | --- | --- | --- |
-| CA-01 — “Sobre mim” fica na linha dos menus, no extremo direito, e continua acionando o contato. | Verificar alinhamento e acionar o controle no exemplo executivo. | A implementar e validar. | Não verificado |
-| CA-02 — O cabeçalho apresenta uma curva senoidal de dados discreta, coerente com o tema e sem prejudicar a leitura. | Avaliar visualmente a hierarquia, contraste e larguras desktop e móvel no exemplo ativo. | SVG decorativo `aria-hidden` no DOM; SCSS aplica cor derivada do tema e largura por token; avaliação visual pendente. | Não verificado |
+| CA-01 — “Sobre mim” fica na faixa superior acima dos menus, separado do futuro alternador Light/Dark, e continua acionando o contato. | Verificar posição e acionar o controle no exemplo executivo. | O HTML mantém o botão na faixa superior, antes de `navbar-collapse`, com `id="abrir_contato"`; usuário aprovou a posição. | Atendido |
+| CA-02 — O cabeçalho apresenta uma curva senoidal de dados discreta, coerente com o tema e sem prejudicar a leitura. | Avaliar visualmente a hierarquia, contraste e larguras desktop e móvel no exemplo ativo. | SVG decorativo `aria-hidden`; SCSS deriva sua cor do tema e usa token para a linha; usuário aprovou a composição visual. | Atendido |
 
-- Conclusão: Aguardando validação visual e funcional do usuário no exemplo executivo.
+- Conclusão: Cumprimento comprovado; HTML, tema e aprovação visual do usuário registrados.
 
 
 ### TASK-008 — Manter o cabeçalho executivo fixo durante a rolagem
