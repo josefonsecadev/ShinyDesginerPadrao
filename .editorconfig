@@ -1,0 +1,31 @@
+root = true
+
+[*.{R,r,Rd,rd,Rmd,rmd,md,yml,yaml,json,css,scss,js,html,xml,txt,sh,ps1}]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+
+[DESCRIPTION]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+
+[NAMESPACE]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+
+[*.Rproj]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+
+[.Rprofile]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+
+[LICENSE]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true

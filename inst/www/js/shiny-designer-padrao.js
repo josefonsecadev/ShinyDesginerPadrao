@@ -50,6 +50,24 @@
     }
   });
 
+  document.addEventListener("keydown", function (event) {
+    if (event.key !== "Escape" || !event.target.closest) {
+      return;
+    }
+
+    var dropdown = event.target.closest(".sdp-navbar li.dropdown");
+
+    if (dropdown) {
+      var toggle = getDirectToggle(dropdown);
+      if (toggle) {
+        toggle.focus();
+      }
+      closeDropdown(dropdown);
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  }, true);
+
   document.addEventListener("mouseenter", function (event) {
     var dropdown = event.target.closest(".sdp-navbar li.dropdown");
 

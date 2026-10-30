@@ -9,7 +9,7 @@ O designer da aplicação deve ser definido uma única vez, durante a criação 
 UI:
 
 ```r
-ShinyDesginerPadrao::sdp_use_designer("analitico")
+ShinyDesginerPadrao::sdp_use_designer("executivo")
 
 ui <- ShinyDesginerPadrao::navbar(
   title = "Meu dashboard",
@@ -25,48 +25,23 @@ Os designers disponíveis são `executivo`, `analitico`, `editorial`, `produto` 
 `operacoes`. Use `sdp_designers()` para consultar as características de cada
 padrão.
 
-## Regra obrigatória para exemplos
+## Versão de referência em padronização
 
-A pasta `examples/` deve conter somente cinco arquivos de exemplo, um para cada
-designer:
+Nesta fase, o desenvolvimento visual se concentra somente no designer
+`executivo`, demonstrado em `examples/exemplo_executivo.R`.
 
-- `exemplo_executivo.R`
-- `exemplo_analitico.R`
-- `exemplo_editorial.R`
-- `exemplo_produto.R`
-- `exemplo_operacoes.R`
+As melhorias são feitas diretamente no Shiny, uma por vez, e avaliadas pelo
+usuário na mesma versão até a aprovação do padrão. O foco inicial é o
+esqueleto da página: cabeçalho, navegação e submenus, fundo, tipografia,
+espaçamentos e rodapé. Figma não é necessário para esse fluxo.
 
-Cada arquivo deve ser uma aplicação Shiny completa e conter todas as
-funcionalidades existentes no pacote. Quando um novo componente for criado,
-como um gráfico, card, tabela ou módulo, ele deve ser incluído nos cinco
-arquivos de exemplo, permitindo comparar o mesmo conjunto de funcionalidades
-entre os designers.
+Novos componentes e ajustes devem ser demonstrados no exemplo executivo.
+Não crie exemplos individuais por componente nem desenvolva variações de
+cor ou tema durante essa padronização.
 
-Não crie um arquivo de exemplo separado para um componente individual. A
-organização por designer é obrigatória e deve ser preservada durante a
-evolução do pacote.
-
-## Regra obrigatória para novos componentes
-
-Todo componente novo deve possuir cinco versões visuais, uma para cada
-designer: `executivo`, `analitico`, `editorial`, `produto` e `operacoes`.
-
-As cinco versões devem respeitar os padrões já definidos para cada tema,
-incluindo:
-
-- cores de fundo, texto, ação e estados;
-- família, peso, tamanho e escala tipográfica;
-- espaçamentos e densidade de informação;
-- formato, raio, bordas e sombras;
-- estados de interação, foco, erro, sucesso e desabilitado.
-
-Por exemplo, um novo card deve ter cinco apresentações coerentes: um card
-executivo, um analítico, um editorial, um de produto e um de operações. A
-função pública pode manter a mesma API, mas a implementação visual deve usar
-os tokens do designer ativo para produzir a variação correspondente.
-
-Cada novo componente também deve ser incluído nos cinco arquivos de exemplo,
-para que as cinco versões sejam demonstradas e verificadas em conjunto.
+Os demais presets e exemplos existentes são preservados por compatibilidade,
+mas sua evolução visual fica suspensa. A expansão para outras versões depende
+da aprovação da base e de solicitação do usuário.
 
 Itens de submenu podem receber uma descriÃ§Ã£o curta para reforÃ§ar a hierarquia
 da navegaÃ§Ã£o:

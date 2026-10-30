@@ -1,5 +1,16 @@
 # ShinyDesginerPadrao (development version)
 
+* O projeto orienta a gravação de arquivos de texto em UTF-8 e corrige o locale
+  POSIX incompatível herdado pelo R no Windows.
+* `navbar()` alinha o contato ao fim da linha de menus e desenha uma curva
+  discreta de dados no cabeçalho executivo (TASK-007).
+* O exemplo executivo deixa os menus sem ícones e aproxima as setas dos nomes
+  dos grupos de submenu (TASK-005).
+* `navbar()` diferencia a superfície dos submenus no designer executivo e
+  destaca os textos selecionados e sob o mouse; Esc fecha o dropdown
+  (TASK-002, TASK-003 e TASK-004).
+* `navbar()` organiza o cabeçalho executivo em duas linhas, com título acima
+  dos menus, maior espaço vertical e quebra de títulos longos (TASK-001).
 * `navbar()` permite descricoes contextuais em itens de submenu, com hierarquia
   visual de titulo e descricao nos cinco exemplos de designer.
 * `sdp_theme()` passa a aplicar direções visuais distintas no navbar, com

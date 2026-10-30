@@ -98,6 +98,24 @@ navbar <- function(
     shiny::tags$span(class = "sdp-navbar__title", title)
   )
 
+  data_pattern <- NULL
+  if (identical(designer_name, "executivo")) {
+    data_pattern <- shiny::tags$svg(
+      class = "sdp-navbar__data-pattern",
+      `aria-hidden` = "true",
+      viewBox = "0 0 960 88",
+      preserveAspectRatio = "none",
+      shiny::tags$path(
+        class = "sdp-navbar__data-wave",
+        d = "M0 44 C80 8 160 8 240 44 S400 80 480 44 S640 8 720 44 S880 80 960 44"
+      ),
+      shiny::tags$circle(class = "sdp-navbar__data-point", cx = "120", cy = "17"),
+      shiny::tags$circle(class = "sdp-navbar__data-point", cx = "360", cy = "71"),
+      shiny::tags$circle(class = "sdp-navbar__data-point", cx = "600", cy = "17"),
+      shiny::tags$circle(class = "sdp-navbar__data-point", cx = "840", cy = "71")
+    )
+  }
+
   page_args <- list(
     title = title_content,
     id = id,
@@ -107,6 +125,14 @@ navbar <- function(
   )
 
   navbar_items <- nav_items
+  contact_button <- NULL
+  if (isTRUE(contact)) {
+    contact_button <- shiny::actionButton(
+      inputId = "abrir_contato",
+      label = "Sobre mim",
+      class = "sdp-navbar__contact"
+    )
+  }
 
   if (length(right_items) > 0 || isTRUE(contact)) {
     navbar_items <- c(
@@ -124,15 +150,7 @@ navbar <- function(
     if (isTRUE(contact)) {
       navbar_items <- c(
         navbar_items,
-        list(
-          bslib::nav_item(
-            shiny::actionButton(
-              inputId = "abrir_contato",
-              label = "Sobre mim",
-              class = "sdp-navbar__contact"
-            )
-          )
-        )
+        list(bslib::nav_item(contact_button))
       )
     }
   }
@@ -141,6 +159,14 @@ navbar <- function(
     bslib::page_navbar,
     c(page_args, navbar_items, list(...))
   )
+
+  if (identical(designer_name, "executivo")) {
+    page_query <- htmltools::tagQuery(page)
+    if (!is.null(data_pattern)) {
+      page_query$find(".navbar-header")$append(data_pattern)
+    }
+    page <- page_query$allTags()
+  }
 
   if (isTRUE(include_css)) {
     page <- htmltools::attachDependencies(

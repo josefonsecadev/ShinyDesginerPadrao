@@ -110,6 +110,8 @@ expect_all_equal(x, expected)    # Every element matches (v3.3.0+)
 
 ### Errors, Warnings, Messages
 
+Use specific condition classes when available, or focused message patterns, to verify behavior. Reserve snapshots for complete user-facing text or complex output that is part of the contract; do not require snapshots for every error or warning.
+
 ```r
 expect_error(1 / "a")
 expect_error(bad_call(), class = "specific_error_class")

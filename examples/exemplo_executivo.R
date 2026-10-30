@@ -3,12 +3,10 @@ ShinyDesginerPadrao::sdp_use_designer("executivo")
 menu_items <- list(
   visao_geral = list(
     label = "Visão geral",
-    icon = "speedometer2",
     ui = shiny::h2("Resumo executivo")
   ),
   desempenho = list(
     label = "Desempenho",
-    icon = "graph-up-arrow",
     items = list(
       metas = list(
         label = "Metas",
@@ -24,7 +22,6 @@ menu_items <- list(
   ),
   relatorios = list(
     label = "Relatórios",
-    icon = "file-earmark-bar-graph",
     ui = shiny::h2("Relatórios")
   )
 )

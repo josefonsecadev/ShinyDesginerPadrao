@@ -18,8 +18,10 @@ inst/
         `-- shiny-designer-padrao.css
 ```
 
-- `_fundamentos.scss` é a fonte única de valores brutos e escalas.
-- `_tokens.scss` transforma fundamentos em propriedades CSS semânticas `--sdp-*` e define o contrato público de tema.
+- `R/theme.R`, por meio de `sdp_designer_specs()` e `sdp_theme()`, define os presets enviados ao bslib: cores, fontes e demais propriedades do tema Bootstrap. Preserve a configuração explícita e a herança do tema do consumidor.
+- `_fundamentos.scss` centraliza os valores brutos e escalas próprios do Sass e os fallbacks usados sem tema equivalente no Bootstrap.
+- `_tokens.scss` define o contrato público `--sdp-*`, mapeia variáveis `--bs-*` e aplica decisões semânticas por designer. Componentes consomem esses tokens, sem repetir valores dos presets.
+- Para propriedades compartilhadas, prefira mapear a variável Bootstrap equivalente em vez de copiar seu valor R para o Sass. Ao alterar tema ou fallback, verifique o designer de referência definido no `AGENTS.md` e, quando a mudança afetar a herança do tema, um tema do consumidor. Preserve a compatibilidade dos demais presets sem exigir sua evolução visual nesta fase. Migrações da estrutura atual exigem escopo próprio; não refatore valores legados incidentalmente.
 - Cada função de UI com estilo próprio usa um partial em `components/`. Funções que apenas compõem componentes existentes reutilizam os partials existentes.
 - `shiny-designer-padrao.scss` é o único entrypoint e usa módulos Sass com `@use`/`@forward`; não use `@import`.
 - `shiny-designer-padrao.css` é gerado. Não o edite manualmente.
@@ -48,7 +50,7 @@ Não use IDs para estilização. Não use nomes baseados na aparência, como `.t
 
 ## Tokens fundamentais
 
-Valores brutos existem somente em `_fundamentos.scss`.
+Novos valores brutos próprios do Sass e escalas pertencem a `_fundamentos.scss`. Valores dos presets bslib pertencem a `R/theme.R`; não os duplique nos componentes ou nos tokens quando houver variável Bootstrap equivalente.
 
 ```scss
 $sdp-cor-azul-700: #123456;
@@ -120,6 +122,10 @@ Valores visuais devem vir de tokens. Literais estruturais como `0`, `100%`, `aut
 
 Breakpoints permanecem como variáveis Sass centralizadas porque não podem ser usados diretamente em media queries por propriedades CSS.
 
+## Markup de dependências
+
+A proibição de estilos inline se aplica ao código e ao markup introduzidos pelo pacote. Dependências podem produzir atributos `style` necessários ao layout ou à interação; não remova esses atributos nem reimplemente a dependência apenas para satisfazer um teste. Identifique sua origem e teste o contrato do componente. Essa exceção não autoriza inserir CSS próprio em R ou passar valores visuais literais à dependência para contornar os tokens.
+
 ## Checklist obrigatório
 
 Antes de concluir uma nova UI:
@@ -131,8 +137,8 @@ Antes de concluir uma nova UI:
 5. Substitua valores visuais literais do componente por tokens.
 6. Recompile o CSS distribuído sem editar o arquivo gerado manualmente.
 7. Anexe a dependência CSS central e teste sua deduplicação.
-8. Teste as classes públicas e a ausência de atributo `style` no markup gerado.
-9. Inspecione o componente renderizado nos temas e larguras aplicáveis.
+8. Teste as classes públicas e a ausência de estilo inline introduzido pelo pacote, distinguindo o markup interno das dependências.
+9. Disponibilize o componente renderizado para validação do usuário nos temas e larguras aplicáveis. Faça inspeção visual própria somente mediante solicitação explícita.
 
 Referências:
 

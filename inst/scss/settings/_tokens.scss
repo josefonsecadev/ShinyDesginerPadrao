@@ -38,18 +38,27 @@
 }
 
 [data-sdp-designer="executivo"] {
-  --sdp-tema-navbar-cor-fundo: var(--bs-primary);
-  --sdp-tema-navbar-cor-texto: var(--sdp-cor-superficie-elevada);
+  --sdp-navbar-espaco-vertical: var(--sdp-espaco-4);
+  --sdp-navbar-titulo-tamanho: #{$sdp-fonte-tamanho-titulo-navbar};
+  --sdp-navbar-borda-largura: #{$sdp-borda-fina};
+  --sdp-tema-navbar-cor-submenu-fundo: var(--bs-body-bg);
+  --sdp-tema-navbar-cor-fundo: color-mix(in srgb, var(--bs-body-bg) 96%, var(--bs-body-color));
+  --sdp-tema-navbar-cor-texto: var(--bs-body-color);
   --sdp-tema-navbar-cor-ativo: var(--bs-warning);
-  --sdp-tema-navbar-cor-borda: color-mix(in srgb, var(--sdp-tema-navbar-cor-texto) 28%, transparent);
+  --sdp-tema-navbar-cor-borda: color-mix(in srgb, var(--bs-body-bg) 80%, var(--bs-body-color));
   --sdp-tema-navbar-cor-faixa: var(--bs-warning);
-  --sdp-tema-navbar-sombra: var(--sdp-sombra-1);
+  --sdp-tema-navbar-faixa-altura: var(--sdp-espaco-0);
+  --sdp-tema-navbar-sombra: none;
   --sdp-tema-navbar-raio-item: var(--sdp-raio-2);
   --sdp-tema-navbar-raio-submenu: var(--sdp-navbar-raio-submenu-padrao);
-  --sdp-tema-navbar-cor-submenu-texto: var(--bs-body-bg);
-  --sdp-tema-navbar-cor-submenu-ativo: var(--bs-body-bg);
-  --sdp-tema-navbar-cor-texto-secundario: var(--bs-body-bg);
-  --sdp-tema-navbar-cor-item-ativo: #{$sdp-cor-amarelo-300};
+  --sdp-tema-navbar-cor-submenu-texto: var(--bs-body-color);
+  --sdp-tema-navbar-cor-submenu-ativo: var(--sdp-tema-navbar-cor-item-ativo);
+  --sdp-tema-navbar-cor-submenu-destaque-fundo: color-mix(in srgb, var(--sdp-tema-navbar-cor-submenu-fundo) 92%, var(--bs-body-color));
+  --sdp-tema-navbar-cor-submenu-destaque-descricao: var(--sdp-tema-navbar-cor-texto);
+  --sdp-tema-navbar-cor-submenu-texto-secundario: color-mix(in srgb, var(--bs-body-color) 76%, var(--bs-body-bg));
+  --sdp-tema-navbar-cor-texto-secundario: var(--bs-body-color);
+  --sdp-tema-navbar-cor-item-ativo: #{$sdp-cor-amarelo-800};
+  --sdp-tema-navbar-cor-dados: color-mix(in srgb, var(--bs-primary) 10%, transparent);
   --sdp-tema-contato-cor-acento: var(--bs-primary);
   --sdp-tema-contato-cor-acento-secundario: var(--bs-warning);
 }

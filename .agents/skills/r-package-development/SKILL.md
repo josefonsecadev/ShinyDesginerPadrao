@@ -35,24 +35,24 @@ Rscript -e "pkgdown::check_pkgdown()"
 # Check the package with R CMD check
 Rscript -e "devtools::check()"
 
-# Format code
-air format .
+# Format changed R files
+air format R/changed-file.R
 ```
 
 ## Coding
 
-* Always run `air format .` after generating code.
+* Format only the R files changed by the task with `air format <files>`. Inspect the diff and preserve unrelated user edits. Format the entire repository only when that is explicitly in scope; report when the formatter is unavailable.
 * Use the base pipe operator (`|>`) not the magrittr pipe (`%>%`).
 * Use `\() ...` for single-line anonymous functions. For all other cases, use `function() {...}`.
 
 ## Testing
 
 - Tests for `R/{name}.R` go in `tests/testthat/test-{name}.R`.
-- All new code should have an accompanying test.
+- Add meaningful behavior or regression tests in proportion to risk. Do not create tests that only mirror implementation or wording for reversible, low-impact changes.
 - If there are existing tests, place new tests next to similar existing tests.
 - Strive to keep tests minimal with few comments.
 - Avoid `expect_true()` and `expect_false()` in favour of a specific expectation which will give a better failure message.
-- When testing errors and warnings, don't use `expect_error()` or `expect_warning()`. Instead, use `expect_snapshot(error = TRUE)` for errors and `expect_snapshot()` for warnings because these allow the user to review the full text of the output.
+- For error and warning behavior, prefer `expect_error()` or `expect_warning()` with a specific condition class when available, or a focused message pattern. Use snapshots when the complete user-facing text or complex output is part of the contract. Follow `testing-r-packages` when designing or reviewing tests.
 
 ## Documentation
 
