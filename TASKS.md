@@ -329,8 +329,8 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 - URL de avaliação: http://127.0.0.1:3878/ — servidor R ativo, designer executivo. Execução: `Rscript -e "pkgload::load_all('.'); shiny::runApp('examples/exemplo_executivo.R', host = '127.0.0.1', port = 3878, launch.browser = FALSE)`
 - Validação do usuário: aprovado em 30/10/2026
 - Aprovação da task: explícita em 30/10/2026
-- Entrega Git: commit e push desta task em execução
-- Commit e destino: pendente
+- Entrega Git: commit criado e push confirmado
+- Commit e destino: `237e084` enviado para `origin/master`
 
 #### Critérios de aceite e análise de cumprimento
 
@@ -409,7 +409,7 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 
 ### TASK-010 — Aplicar famílias tipográficas por função no designer executivo
 
-- Estado: Cadastrada
+- Estado: Concluída
 - Categoria principal: Design
 - Categorias secundárias: CSS
 - Esforço: Baixo
@@ -421,23 +421,23 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 - Referência: designer `executivo`, `examples/exemplo_executivo.R`; stacks fornecidas pelo usuário
 - Resultado esperado: `--sdp-tipografia-familia-base` usa `"IBM Plex Sans", "Segoe UI", system-ui, sans-serif`; títulos usam `"Space Grotesk", "Segoe UI", system-ui, sans-serif`; o token monoespaçado usa `"IBM Plex Mono", ui-monospace, "Cascadia Mono", monospace`. Fallbacks locais permanecem disponíveis sem exigir fontes remotas.
 - Dependências: TASK-005, para aplicar a direção tipográfica sobre a base executiva em validação.
-- Resultado e arquivos alterados: tarefa cadastrada; nenhuma implementação iniciada.
-- Verificações e pendências: conferir mapeamento de tokens para corpo, títulos, menus e submenus; validar monoespaçado em qualquer texto que o exija e avaliar hierarquia visual no exemplo executivo.
-- URL de avaliação: não aplicável até a execução
-- Validação do usuário: pendente
-- Aprovação da task: pendente
-- Entrega Git: pendente de implementação, aceite e aprovação explícita
+- Resultado e arquivos alterados: `R/theme.R` aplica as stacks solicitadas apenas ao preset executivo; `_fundamentos.scss` e `_tokens.scss` acrescentam o token monoespaçado centralizado; CSS compilado e NEWS atualizados.
+- Verificações e pendências: Sass compilado; `sdp_designers()` e o tema bslib mostram IBM Plex Sans, Space Grotesk e IBM Plex Mono com os fallbacks; regra dos menus usa o token base, marca e títulos usam o token de títulos, e o token mono aponta para `--bs-font-monospace`. Servidor responde HTTP 200. Avaliação visual da hierarquia e legibilidade pendente.
+- URL de avaliação: http://127.0.0.1:3878/ — servidor R ativo, designer executivo. Execução: `Rscript -e "pkgload::load_all('.'); shiny::runApp('examples/exemplo_executivo.R', host = '127.0.0.1', port = 3878, launch.browser = FALSE)"`
+- Validação do usuário: aprovado em 30/10/2026
+- Aprovação da task: explícita em 30/10/2026
+- Entrega Git: commit e push desta task em execução
 - Commit e destino: pendente
 
 #### Critérios de aceite e análise de cumprimento
 
 | Critério / resultado esperado | Plano de verificação | Evidência e resultado | Situação |
 | --- | --- | --- | --- |
-| CA-01 — O corpo da página, os menus e os submenus usam a família IBM Plex Sans com os fallbacks indicados. | Conferir os tokens calculados e validar hierarquia e legibilidade no exemplo executivo. | A implementar e validar. | Não verificado |
-| CA-02 — Títulos usam Space Grotesk com os fallbacks indicados. | Conferir o token de títulos e validar a aplicação nos títulos do cabeçalho e do conteúdo. | A implementar e validar. | Não verificado |
-| CA-03 — Conteúdo monoespaçado usa IBM Plex Mono com os fallbacks indicados quando esse papel existir. | Verificar o token e os elementos que tenham função monoespaçada, sem aplicar a família ao texto comum. | A implementar e validar. | Não verificado |
+| CA-01 — O corpo da página, os menus e os submenus usam a família IBM Plex Sans com os fallbacks indicados. | Conferir os tokens calculados e validar hierarquia e legibilidade no exemplo executivo. | Tema executivo reporta a stack solicitada e os seletores de menu usam o token base; usuário aprovou. | Atendido |
+| CA-02 — Títulos usam Space Grotesk com os fallbacks indicados. | Conferir o token de títulos e validar a aplicação nos títulos do cabeçalho e do conteúdo. | Tema executivo reporta a stack solicitada; marca e títulos consomem o token de títulos; usuário aprovou. | Atendido |
+| CA-03 — Conteúdo monoespaçado usa IBM Plex Mono com os fallbacks indicados quando esse papel existir. | Verificar o token e os elementos que tenham função monoespaçada, sem aplicar a família ao texto comum. | Tema bslib define a stack de código e `--sdp-tipografia-familia-mono` referencia `--bs-font-monospace` com a stack de fallback solicitada; usuário aprovou. | Atendido |
 
-- Conclusão: Cadastrada; não iniciar até solicitação do usuário.
+- Conclusão: Cumprimento comprovado; stacks do tema, tokens e aprovação do usuário registrados.
 
 
 ### TASK-011 — Adicionar alternância entre os modos claro e escuro

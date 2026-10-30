@@ -12,6 +12,7 @@
   --sdp-cor-foco: var(--bs-primary, #{$sdp-cor-azul-500});
   --sdp-tipografia-familia-base: var(--bs-body-font-family, #{$sdp-fonte-familia-base});
   --sdp-tipografia-familia-titulo: var(--bs-heading-font-family, #{$sdp-fonte-familia-base});
+  --sdp-tipografia-familia-mono: var(--bs-font-monospace, #{$sdp-fonte-familia-mono});
   --sdp-tipografia-tamanho-base: var(--bs-body-font-size, #{$sdp-fonte-tamanho-base});
   --sdp-tipografia-peso-controle: #{$sdp-fonte-peso-600};
   --sdp-tipografia-peso-titulo: var(--bs-heading-font-weight, #{$sdp-fonte-peso-700});

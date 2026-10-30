@@ -19,6 +19,8 @@
   variações de paleta, contraste, tipografia, densidade, raios e sombras.
 * `sdp_theme()` oferece cinco presets de designer para dashboards e `navbar()`
   aceita a seleção direta pelo argumento `designer`.
+* `sdp_theme("executivo")` usa IBM Plex Sans no corpo e na navegação, Space
+  Grotesk em títulos e IBM Plex Mono para conteúdo monoespaçado (TASK-010).
 * `sdp_use_designer()` permite definir o designer uma única vez para toda a
   aplicação, com consulta por `sdp_current_designer()` e limpeza por
   `sdp_clear_designer()`.

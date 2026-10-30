@@ -168,9 +168,24 @@ sdp_designer_specs <- function() {
       info = "#175CD3",
       warning = "#B54708",
       danger = "#B42318",
-      base_font = c("Inter", "Segoe UI", "sans-serif"),
-      heading_font = c("Inter", "Segoe UI", "sans-serif"),
-      code_font = c("ui-monospace", "Cascadia Code", "Consolas", "monospace"),
+      base_font = c(
+        "IBM Plex Sans",
+        "Segoe UI",
+        "system-ui",
+        "sans-serif"
+      ),
+      heading_font = c(
+        "Space Grotesk",
+        "Segoe UI",
+        "system-ui",
+        "sans-serif"
+      ),
+      code_font = c(
+        "IBM Plex Mono",
+        "ui-monospace",
+        "Cascadia Mono",
+        "monospace"
+      ),
       font_size_base = "1rem",
       font_scale = 1,
       line_height_base = 1.5,

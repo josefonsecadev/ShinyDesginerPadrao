@@ -11,6 +11,7 @@
   --sdp-cor-foco: var(--bs-primary, #3b82f6);
   --sdp-tipografia-familia-base: var(--bs-body-font-family, system-ui, -apple-system, Segoe UI, sans-serif);
   --sdp-tipografia-familia-titulo: var(--bs-heading-font-family, system-ui, -apple-system, Segoe UI, sans-serif);
+  --sdp-tipografia-familia-mono: var(--bs-font-monospace, IBM Plex Mono, ui-monospace, Cascadia Mono, monospace);
   --sdp-tipografia-tamanho-base: var(--bs-body-font-size, 1rem);
   --sdp-tipografia-peso-controle: 600;
   --sdp-tipografia-peso-titulo: var(--bs-heading-font-weight, 700);
