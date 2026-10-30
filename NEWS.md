@@ -7,6 +7,9 @@
   atuação com a tipografia IBM Plex Mono (TASK-012).
 * `navbar()` aplica o gradiente informado ao título do designer executivo e
   preserva texto sólido de alto contraste no modo escuro (TASK-013).
+* `navbar()` aumenta em 15% o espaço entre itens do menu executivo e remove a
+  sombra de foco do mouse no botão “Sobre mim”, mantendo contorno de teclado
+  visível (TASK-014).
 * O projeto orienta a gravação de arquivos de texto em UTF-8 e corrige o locale
   POSIX incompatível herdado pelo R no Windows.
 * `navbar()` oferece um controle Light/Dark no designer executivo, com paleta

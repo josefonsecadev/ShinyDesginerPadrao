@@ -510,7 +510,7 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 
 ### TASK-013 — Aplicar gradiente ao título do dashboard executivo
 
-- Estado: Aprovada — envio pendente
+- Estado: Concluída
 - Categoria principal: Design
 - Categorias secundárias: CSS
 - Esforço: Baixo
@@ -527,7 +527,8 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 - URL de avaliação: http://127.0.0.1:3878/ — servidor R ativo, designer executivo. Execução: `Rscript -e "pkgload::load_all('.'); shiny::runApp('examples/exemplo_executivo.R', host = '127.0.0.1', port = 3878, launch.browser = FALSE)"`
 - Validação do usuário: dispensada; aprovação automática autorizada em 30/10/2026
 - Aprovação da task: explícita para execução automática em 30/10/2026
-- Entrega Git: commit e push desta task em execução
+- Entrega Git: commit criado e push confirmado
+- Commit e destino: `004b9d9` enviado para `origin/master`
 - Commit e destino: pendente
 
 #### Critérios de aceite e análise de cumprimento
@@ -543,7 +544,7 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 
 ### TASK-014 — Refinar espaçamento do menu e sombra do contato
 
-- Estado: Cadastrada
+- Estado: Aprovada — envio pendente
 - Categoria principal: Design
 - Categorias secundárias: UI / Componentes, CSS
 - Esforço: Baixo
@@ -555,8 +556,40 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 - Referência: designer `executivo`, `examples/exemplo_executivo.R`.
 - Resultado esperado: distância entre itens do menu aumentada em 15% em relação ao valor atual; clique em “Sobre mim” sem sombra decorativa, mantendo o indicador de foco por teclado.
 - Dependências: TASK-005 e TASK-007, que estabelecem a composição atual do menu e do contato.
+- Resultado e arquivos alterados: token executivo `--sdp-navbar-espaco-entre-itens` aumenta a lacuna atual em 15%; botão de contato remove sombra no foco via mouse e mantém contorno via teclado em `inst/scss/components/_navbar.scss`.
+- Verificações e pendências: Sass compilado, `git diff --check` aprovado e página/CSS responderam HTTP 200. CSS servido usa o token `calc(var(--sdp-espaco-1) * 1.15)` no menu desktop e móvel; regra de foco de mouse remove a sombra e foco de teclado mantém contorno visível. Validação visual dispensada pelo usuário em 30/10/2026.
+- URL de avaliação: http://127.0.0.1:3878/ — servidor R ativo, designer executivo. Execução: `Rscript -e "pkgload::load_all('.'); shiny::runApp('examples/exemplo_executivo.R', host = '127.0.0.1', port = 3878, launch.browser = FALSE)"`
+- Validação do usuário: dispensada; aprovação automática autorizada em 30/10/2026
+- Aprovação da task: explícita para execução automática em 30/10/2026
+- Entrega Git: commit e push desta task em execução
+- Commit e destino: pendente
+
+#### Critérios de aceite e análise de cumprimento
+
+| Critério / resultado esperado | Plano de verificação | Evidência e resultado | Situação |
+| --- | --- | --- | --- |
+| CA-01 — O espaçamento entre itens do menu executivo é 15% maior que o atual. | Conferir o token ou cálculo aplicado e avaliar a distância no exemplo executivo. | `--sdp-navbar-espaco-entre-itens` multiplica a lacuna base por `1.15` e é usado no menu desktop e móvel; validação visual dispensada pelo usuário. | Atendido |
+| CA-02 — Clicar em “Sobre mim” não mostra sombra decorativa e o foco de teclado continua visível. | Conferir hover, clique, estado ativo e foco via teclado no exemplo. | Seletor de foco não teclado zera `box-shadow`; `:focus-visible` mantém contorno via token `--sdp-cor-foco`. CSS servido confirmado e validação visual dispensada pelo usuário. | Atendido |
+
+- Conclusão: Cumprimento técnico comprovado e aprovado automaticamente pelo usuário; validação visual dispensada.
+
+
+### TASK-015 — Enriquecer o fundo decorativo do cabeçalho executivo
+
+- Estado: Cadastrada
+- Categoria principal: Design
+- Categorias secundárias: UI / Componentes, CSS, Acessibilidade
+- Esforço: Baixo
+- Estimativa de tokens totais: 5–8 mil tokens, incluindo desenho, implementação e validação
+- Confiança da estimativa: média
+- Demanda de origem: Fundo maximalista com elementos SVG trigonométricos solicitado em 30/10/2026
+- Prioridade: após as TASK-013 e TASK-014
+- Objetivo: Tornar o fundo do cabeçalho executivo mais maximalista com elementos SVG trigonométricos usados somente como preenchimento decorativo.
+- Referência: designer `executivo`, `examples/exemplo_executivo.R`; o cabeçalho já contém uma curva de dados SVG.
+- Resultado esperado: fundo visualmente mais rico, com elementos SVG decorativos de inspiração trigonométrica, sem competir com título, navegação, contato ou alternador de tema; comportamento consistente em temas claro e escuro e em telas estreitas.
+- Dependências: TASK-007 para a composição atual do cabeçalho; TASK-013 para preservar a legibilidade do título.
 - Resultado e arquivos alterados: tarefa cadastrada; nenhuma implementação iniciada.
-- Verificações e pendências: comparar espaçamento com a base atual; conferir clique, estado ativo e foco por teclado do botão de contato no exemplo executivo.
+- Verificações e pendências: avaliar composição e legibilidade no exemplo executivo; verificar escala responsiva, modo claro/escuro, `aria-hidden`, ausência de interação e de bloqueio dos controles.
 - URL de avaliação: não aplicável até a execução
 - Validação do usuário: pendente
 - Aprovação da task: pendente
@@ -567,10 +600,43 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 
 | Critério / resultado esperado | Plano de verificação | Evidência e resultado | Situação |
 | --- | --- | --- | --- |
-| CA-01 — O espaçamento entre itens do menu executivo é 15% maior que o atual. | Conferir o token ou cálculo aplicado e avaliar a distância no exemplo executivo. | A implementar e validar. | Não verificado |
-| CA-02 — Clicar em “Sobre mim” não mostra sombra decorativa e o foco de teclado continua visível. | Conferir hover, clique, estado ativo e foco via teclado no exemplo. | A implementar e validar. | Não verificado |
+| CA-01 — O cabeçalho contém mais elementos SVG de inspiração trigonométrica e aparência mais maximalista, apenas como preenchimento. | Avaliar a composição no cabeçalho executivo em repouso. | A implementar e validar. | Não verificado |
+| CA-02 — A decoração não encobre nem compete com título, menus, contato ou controle de tema. | Conferir hierarquia e legibilidade no exemplo executivo. | A implementar e validar. | Não verificado |
+| CA-03 — A decoração é semântica e interativamente neutra, com adaptação a temas e telas estreitas. | Verificar `aria-hidden`, `pointer-events`, cores via tokens e quebra responsiva em modos claro e escuro. | A implementar e validar. | Não verificado |
 
-- Conclusão: Cadastrada; não iniciar até solicitação do usuário e cumprimento das dependências.
+- Conclusão: Cadastrada; aguardar a execução da sequência e solicitação do usuário.
+
+
+### TASK-016 — Adicionar linha divisória entre a página e o rodapé
+
+- Estado: Cadastrada
+- Categoria principal: CSS
+- Categorias secundárias: Design
+- Esforço: Baixo
+- Estimativa de tokens totais: 2–4 mil tokens, incluindo aplicação e validação
+- Confiança da estimativa: média
+- Demanda de origem: Linha divisória entre página e rodapé solicitada em 30/10/2026
+- Prioridade: após as TASK-013, TASK-014 e TASK-015
+- Objetivo: Adicionar uma linha discreta entre o conteúdo da página executiva e o rodapé.
+- Referência: designer `executivo`, `examples/exemplo_executivo.R`; rodapé criado na TASK-009 e preenchido na TASK-012.
+- Resultado esperado: separação visível no limite entre conteúdo e rodapé, usando tokens de borda e mantendo o posicionamento do rodapé no fim real da página em temas claro e escuro.
+- Dependências: TASK-009 e TASK-012, para a estrutura e o conteúdo do rodapé.
+- Resultado e arquivos alterados: tarefa cadastrada; nenhuma implementação iniciada.
+- Verificações e pendências: avaliar a linha, contraste e posição no exemplo executivo em telas largas e estreitas e nos modos claro e escuro.
+- URL de avaliação: não aplicável até a execução
+- Validação do usuário: pendente
+- Aprovação da task: pendente
+- Entrega Git: pendente de implementação, aceite e aprovação explícita
+- Commit e destino: pendente
+
+#### Critérios de aceite e análise de cumprimento
+
+| Critério / resultado esperado | Plano de verificação | Evidência e resultado | Situação |
+| --- | --- | --- | --- |
+| CA-01 — Uma linha discreta separa o conteúdo principal do rodapé executivo. | Conferir a borda no limite entre página e rodapé no exemplo. | A implementar e validar. | Não verificado |
+| CA-02 — A linha usa tokens e permanece visível em temas claro e escuro sem alterar a posição do rodapé. | Revisar o SCSS e conferir a separação e o fim real da página em ambos os temas. | A implementar e validar. | Não verificado |
+
+- Conclusão: Cadastrada; aguardar a execução da sequência e solicitação do usuário.
 
 
 ## Rodada atual de ajustes — aguardando avaliação

@@ -48,6 +48,7 @@
     rgb(63, 114, 201) 42%,
     rgb(244, 146, 63) 100%
   );
+  --sdp-navbar-espaco-entre-itens: calc(var(--sdp-espaco-1) * 1.15);
   --sdp-navbar-borda-largura: #{$sdp-borda-fina};
   --sdp-tema-navbar-cor-submenu-fundo: var(--bs-body-bg);
   --sdp-tema-navbar-cor-fundo: color-mix(in srgb, var(--bs-body-bg) 96%, var(--bs-body-color));
