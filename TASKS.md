@@ -344,7 +344,7 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 
 ### TASK-008 — Manter o cabeçalho executivo fixo durante a rolagem
 
-- Estado: Cadastrada
+- Estado: Em aberto
 - Categoria principal: Reatividade / Interação
 - Categorias secundárias: CSS
 - Esforço: Baixo
@@ -354,25 +354,25 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 - Prioridade: sequência sugerida pelo número da task
 - Objetivo: Garantir que o cabeçalho permaneça visível no topo enquanto a página é rolada.
 - Referência: designer `executivo`, `examples/exemplo_executivo.R`
-- Comportamento ou aparência atual: o SCSS já declara `position: sticky` e `top: 0`; o comportamento renderizado ainda precisa ser verificado.
+- Comportamento ou aparência atual: o SCSS já declara `position: sticky`, `top: 0` e camada sticky; a resposta do exemplo foi confirmada, mas a rolagem renderizada depende da validação do usuário.
 - Resultado esperado: cabeçalho aderido ao topo durante a rolagem, sem cobrir o conteúdo nem impedir menus e controles.
 - Dependências: TASK-005 e TASK-007, para validar o comportamento sobre a composição atualizada do cabeçalho.
-- Resultado e arquivos alterados: tarefa cadastrada; nenhuma implementação iniciada.
-- Verificações e pendências: reproduzir rolagem no exemplo executivo e validar teclado, menus e conteúdo sob o cabeçalho.
-- URL de avaliação: não aplicável até a execução
+- Resultado e arquivos alterados: nenhuma alteração de implementação necessária; regra sticky existente em `inst/scss/components/_navbar.scss` e no CSS compilado.
+- Verificações e pendências: servidor do exemplo executivo respondia HTTP 200; validação de rolagem, conteúdo, menus e controles por teclado adiada até haver mais corpo no site.
+- URL de avaliação: http://127.0.0.1:3878/ — servidor R ativo, designer executivo. Execução: `Rscript -e "pkgload::load_all('.'); shiny::runApp('examples/exemplo_executivo.R', host = '127.0.0.1', port = 3878, launch.browser = FALSE)"`
 - Validação do usuário: pendente
 - Aprovação da task: pendente
-- Entrega Git: pendente de implementação, aceite e aprovação explícita
+- Entrega Git: pendente de validação e aprovação explícita
 - Commit e destino: pendente
 
 #### Critérios de aceite e análise de cumprimento
 
 | Critério / resultado esperado | Plano de verificação | Evidência e resultado | Situação |
 | --- | --- | --- | --- |
-| CA-01 — O cabeçalho permanece no topo durante a rolagem da página. | Rolar o exemplo executivo do início ao conteúdo inferior e observar o cabeçalho. | Regra `position: sticky; top: 0` existe no SCSS; efeito renderizado ainda não verificado. | Não verificado |
-| CA-02 — O cabeçalho não encobre o conteúdo nem bloqueia os menus e o botão de contato. | Verificar posição inicial, rolagem, navegação por menu e foco por teclado. | A implementar e validar. | Não verificado |
+| CA-01 — O cabeçalho permanece no topo durante a rolagem da página. | Rolar o exemplo executivo do início ao conteúdo inferior e observar o cabeçalho. | SCSS declara `position: sticky; top: 0`; comportamento renderizado aguarda conteúdo suficiente e validação do usuário. | Em aberto |
+| CA-02 — O cabeçalho não encobre o conteúdo nem bloqueia os menus e o botão de contato. | Verificar posição inicial, rolagem, navegação por menu e foco por teclado. | Comportamento visual e funcional aguarda conteúdo suficiente e validação do usuário. | Em aberto |
 
-- Conclusão: Cadastrada; não iniciar até solicitação do usuário.
+- Conclusão: Em aberto; validação adiada até que o site tenha corpo suficiente para avaliar rolagem.
 
 
 ### TASK-009 — Criar um rodapé discreto no fim real da página executiva
@@ -394,8 +394,8 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 - URL de avaliação: http://127.0.0.1:3878/ — servidor R ativo, designer executivo. Execução: `Rscript -e "pkgload::load_all('.'); shiny::runApp('examples/exemplo_executivo.R', host = '127.0.0.1', port = 3878, launch.browser = FALSE)"`
 - Validação do usuário: aprovado em 30/10/2026
 - Aprovação da task: explícita em 30/10/2026
-- Entrega Git: commit e push desta task em execução
-- Commit e destino: pendente
+- Entrega Git: commit criado e push confirmado
+- Commit e destino: `8b1cfed` enviado para `origin/master`
 
 #### Critérios de aceite e análise de cumprimento
 
@@ -426,8 +426,8 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 - URL de avaliação: http://127.0.0.1:3878/ — servidor R ativo, designer executivo. Execução: `Rscript -e "pkgload::load_all('.'); shiny::runApp('examples/exemplo_executivo.R', host = '127.0.0.1', port = 3878, launch.browser = FALSE)"`
 - Validação do usuário: aprovado em 30/10/2026
 - Aprovação da task: explícita em 30/10/2026
-- Entrega Git: commit e push desta task em execução
-- Commit e destino: pendente
+- Entrega Git: commit criado e push confirmado
+- Commit e destino: `8b1cfed` enviado para `origin/master`
 
 #### Critérios de aceite e análise de cumprimento
 
@@ -442,7 +442,7 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 
 ### TASK-011 — Adicionar alternância entre os modos claro e escuro
 
-- Estado: Cadastrada
+- Estado: Concluída
 - Categoria principal: UI / Componentes
 - Categorias secundárias: Design, Reatividade / Interação
 - Esforço: Baixo
@@ -452,10 +452,44 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 - Prioridade: sequência sugerida pelo número da task
 - Objetivo: Adicionar um controle para alternar entre os modos claro e escuro no designer executivo.
 - Referência: designer `executivo`, `examples/exemplo_executivo.R`; o modo claro atual é a referência visual.
-- Resultado esperado: o modo claro mantém a aparência atual e é selecionado inicialmente; o modo escuro usa tons pretos e adapta superfícies, textos, estados e componentes ao mesmo padrão visual e ao sistema de tokens do pacote. O controle mostra sol e rótulo `Light` para o modo claro, e lua e rótulo `Dark` para o modo escuro.
+- Resultado esperado: o modo claro mantém a aparência atual e é selecionado inicialmente; o modo escuro adapta superfícies, textos, estados e componentes ao sistema de tokens do pacote e considera a paleta de referência `--fem-ink: #101D39`, `--fem-navy: #1B4D9B` e `--fem-navy-deep: #0A1B3D`, preservando contraste legível. Um único botão compacto mostra o ícone de sol com `Light` ou a lua com `Dark`, de acordo com o modo atual, e alterna ao clique; fica à direita na linha dos menus, abaixo de “Sobre mim”.
 - Dependências: TASK-005 e TASK-007, para basear a alternância no cabeçalho executivo validado.
+- Resultado e arquivos alterados: `navbar()` adiciona um alternador executivo compacto; `R/theme-toggle.R` contém os ícones SVG fornecidos; `inst/scss/components/_theme-toggle.scss` estiliza o controle e `inst/scss/settings/_tokens.scss` centraliza as cores dark; JavaScript aplica o modo apenas à página executiva.
+- Verificações e pendências: Sass compilado, JavaScript validado com `node --check`, `git diff --check` aprovado e página, JavaScript e CSS responderam HTTP 200. A marcação contém um único botão compacto (fonte a 87,5% do tamanho base); CSS exibe somente ícone correspondente ao modo e o clique alterna modo, rótulo e ícone. Validação visual e interação pelo usuário pendentes.
+- URL de avaliação: http://127.0.0.1:3878/ — servidor R ativo, designer executivo. Execução: `Rscript -e "pkgload::load_all('.'); shiny::runApp('examples/exemplo_executivo.R', host = '127.0.0.1', port = 3878, launch.browser = FALSE)"`
+- Validação do usuário: aprovado em 30/10/2026
+- Aprovação da task: explícita em 30/10/2026
+- Entrega Git: commit e push desta task em execução
+- Commit e destino: pendente
+
+#### Critérios de aceite e análise de cumprimento
+
+| Critério / resultado esperado | Plano de verificação | Evidência e resultado | Situação |
+| --- | --- | --- | --- |
+| CA-01 — Um botão acessível exibe `Light` com sol ou `Dark` com lua, um por vez, e alterna ao clique ou teclado. | Conferir ícone e rótulo em cada modo, estado selecionado e operação por mouse e teclado. | Um botão nativo, compacto, com rótulo e ícone alternados; CSS oculta o ícone do estado inativo. HTTP 200 e JavaScript validados; interação e aparência aprovadas pelo usuário. | Atendido |
+| CA-02 — O modo claro inicial preserva a aparência atual do designer executivo. | Comparar os componentes principais com a base aprovada no exemplo executivo. | Estado inicial Light preservado no markup e aparência aprovada pelo usuário. | Atendido |
+| CA-03 — O modo escuro aplica a paleta de referência `--fem-ink: #101D39`, `--fem-navy: #1B4D9B` e `--fem-navy-deep: #0A1B3D` às superfícies e estados apropriados de navbar, menus, submenus e conteúdo, mantendo texto e estados legíveis. | Mapear as cores para tokens semânticos e verificar superfícies, textos, foco, hover, seleção e contraste no exemplo executivo. | Tokens aplicam as três cores; contraste calculado entre 6.37:1 e 16.22:1 nas combinações principais; resultado aprovado pelo usuário. | Atendido |
+| CA-04 — As duas paletas usam tokens centralizados e não alteram implicitamente o tema global do app consumidor. | Revisar a origem dos estilos e conferir o tema bslib do consumidor durante a alternância. | Cores estão em tokens Sass; JavaScript altera `data-sdp-color-mode` e `data-bs-theme` no `.bslib-page-navbar`, sem modificar o tema global; implementação aprovada. | Atendido |
+
+- Conclusão: Cumprimento comprovado; critérios técnicos e validação visual do usuário atendidos.
+
+
+### TASK-012 — Adicionar informações configuráveis ao rodapé executivo
+
+- Estado: Cadastrada
+- Categoria principal: UI / Componentes
+- Categorias secundárias: Design, CSS, Documentação
+- Esforço: Baixo
+- Estimativa de tokens totais: 4–7 mil tokens, incluindo implementação e validação
+- Confiança da estimativa: média
+- Demanda de origem: Conteúdo do rodapé solicitado em 30/10/2026
+- Prioridade: sequência após a TASK-009 e a TASK-010
+- Objetivo: Exibir informações de propriedade à esquerda e áreas de atuação à direita no rodapé do exemplo executivo.
+- Referência: designer `executivo`, `examples/exemplo_executivo.R`; configurar o conteúdo explicitamente para preservar o padrão vazio de componentes reutilizáveis.
+- Resultado esperado: bloco esquerdo `® 2026 José Fonseca. Todos os direitos reservados. Propriedade intelectual integral de José Ferreira.`; bloco direito `Ciência de Dados . Engenharia de Dados . R . Python`; ambos usam a família `"IBM Plex Mono", ui-monospace, "Cascadia Mono", monospace`, alinhados nas extremidades do rodapé e com adaptação para telas estreitas.
+- Dependências: TASK-009, para preencher o rodapé implementado; TASK-010, para reutilizar o token monoespaçado centralizado.
 - Resultado e arquivos alterados: tarefa cadastrada; nenhuma implementação iniciada.
-- Verificações e pendências: conferir alternância por interação, contraste e estados do navbar, submenus, conteúdo e contato nos dois modos; validação visual e funcional no exemplo executivo.
+- Verificações e pendências: conferir conteúdo UTF-8 e ordem de leitura, alinhamento nas extremidades, tipografia por token e quebra responsiva; avaliar visual e funcionalmente o exemplo executivo.
 - URL de avaliação: não aplicável até a execução
 - Validação do usuário: pendente
 - Aprovação da task: pendente
@@ -466,12 +500,77 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 
 | Critério / resultado esperado | Plano de verificação | Evidência e resultado | Situação |
 | --- | --- | --- | --- |
-| CA-01 — Um controle acessível oferece as opções `Light` com ícone de sol e `Dark` com ícone de lua. | Conferir ícones, rótulos, estado selecionado e operação por mouse e teclado. | A implementar e validar. | Não verificado |
-| CA-02 — O modo claro inicial preserva a aparência atual do designer executivo. | Comparar os componentes principais com a base aprovada no exemplo executivo. | A implementar e validar. | Não verificado |
-| CA-03 — O modo escuro aplica tons pretos coerentes a navbar, menus, submenus e conteúdo, mantendo texto e estados legíveis. | Verificar superfícies, textos, foco, hover, seleção e contraste no exemplo executivo. | A implementar e validar. | Não verificado |
-| CA-04 — As duas paletas usam tokens centralizados e não alteram implicitamente o tema global do app consumidor. | Revisar a origem dos estilos e conferir o tema bslib do consumidor durante a alternância. | A implementar e validar. | Não verificado |
+| CA-01 — O bloco esquerdo mostra integralmente o texto de propriedade solicitado, com `®` e acentuação correta. | Conferir o HTML renderizado e avaliar a legibilidade no rodapé executivo. | A implementar e validar. | Não verificado |
+| CA-02 — O bloco direito mostra `Ciência de Dados . Engenharia de Dados . R . Python` e fica alinhado à direita. | Conferir o HTML e o alinhamento no exemplo executivo em larguras larga e estreita. | A implementar e validar. | Não verificado |
+| CA-03 — Os blocos usam IBM Plex Mono com os fallbacks indicados por meio do token monoespaçado do pacote. | Conferir o token aplicado e verificar a quebra do conteúdo sem sobreposição em telas estreitas. | A implementar e validar. | Não verificado |
+| CA-04 — O conteúdo pessoal é configurado explicitamente no exemplo e não vira padrão de `navbar()` nem de outros consumidores. | Revisar defaults da API e a configuração do exemplo executivo. | A implementar e validar. | Não verificado |
 
-- Conclusão: Cadastrada; não iniciar até solicitação do usuário.
+- Conclusão: Cadastrada; não iniciar até solicitação do usuário e cumprimento das dependências.
+
+
+### TASK-013 — Aplicar gradiente ao título do dashboard executivo
+
+- Estado: Cadastrada
+- Categoria principal: Design
+- Categorias secundárias: CSS
+- Esforço: Baixo
+- Estimativa de tokens totais: 3–5 mil tokens, incluindo aplicação e validação
+- Confiança da estimativa: média
+- Demanda de origem: Gradiente do título solicitado em 30/10/2026
+- Prioridade: após a TASK-010, conforme sequência das tasks
+- Objetivo: Aplicar ao título do dashboard no cabeçalho executivo o gradiente fornecido pelo usuário.
+- Referência: designer `executivo`, `examples/exemplo_executivo.R`; título `.sdp-navbar__title`.
+- Resultado esperado: gradiente `linear-gradient(110deg, rgb(27, 77, 155) 0%, rgb(63, 114, 201) 42%, rgb(244, 146, 63) 100%)` aplicado somente ao título do designer executivo, com texto legível em títulos longos e larguras estreitas.
+- Dependências: TASK-010, para aplicar o gradiente junto à direção tipográfica aprovada para o título.
+- Resultado e arquivos alterados: tarefa cadastrada; nenhuma implementação iniciada.
+- Verificações e pendências: conferir o gradiente nos três pontos, legibilidade, quebra do título e escopo restrito ao designer executivo; validar visualmente o exemplo.
+- URL de avaliação: não aplicável até a execução
+- Validação do usuário: pendente
+- Aprovação da task: pendente
+- Entrega Git: pendente de implementação, aceite e aprovação explícita
+- Commit e destino: pendente
+
+#### Critérios de aceite e análise de cumprimento
+
+| Critério / resultado esperado | Plano de verificação | Evidência e resultado | Situação |
+| --- | --- | --- | --- |
+| CA-01 — O título do dashboard usa exatamente o gradiente e as paradas de cor informadas. | Conferir os valores CSS do tema executivo e avaliar o gradiente no exemplo. | A implementar e validar. | Não verificado |
+| CA-02 — O título continua legível e quebra adequadamente em larguras estreitas. | Avaliar contraste, quebra e truncamento do título no exemplo executivo. | A implementar e validar. | Não verificado |
+| CA-03 — O gradiente não altera títulos dos demais designers nem exige estilos inline no markup R. | Conferir o escopo do seletor e a implementação em SCSS externo. | A implementar e validar. | Não verificado |
+
+- Conclusão: Cadastrada; não iniciar até solicitação do usuário e cumprimento das dependências.
+
+
+### TASK-014 — Refinar espaçamento do menu e sombra do contato
+
+- Estado: Cadastrada
+- Categoria principal: Design
+- Categorias secundárias: UI / Componentes, CSS
+- Esforço: Baixo
+- Estimativa de tokens totais: 3–5 mil tokens, incluindo aplicação e validação
+- Confiança da estimativa: média
+- Demanda de origem: Ajustes do menu solicitados em 30/10/2026
+- Prioridade: sequência após as tasks em andamento
+- Objetivo: Aumentar o espaço entre os itens do menu executivo e remover a sombra exibida ao clicar em “Sobre mim”.
+- Referência: designer `executivo`, `examples/exemplo_executivo.R`.
+- Resultado esperado: distância entre itens do menu aumentada em 15% em relação ao valor atual; clique em “Sobre mim” sem sombra decorativa, mantendo o indicador de foco por teclado.
+- Dependências: TASK-005 e TASK-007, que estabelecem a composição atual do menu e do contato.
+- Resultado e arquivos alterados: tarefa cadastrada; nenhuma implementação iniciada.
+- Verificações e pendências: comparar espaçamento com a base atual; conferir clique, estado ativo e foco por teclado do botão de contato no exemplo executivo.
+- URL de avaliação: não aplicável até a execução
+- Validação do usuário: pendente
+- Aprovação da task: pendente
+- Entrega Git: pendente de implementação, aceite e aprovação explícita
+- Commit e destino: pendente
+
+#### Critérios de aceite e análise de cumprimento
+
+| Critério / resultado esperado | Plano de verificação | Evidência e resultado | Situação |
+| --- | --- | --- | --- |
+| CA-01 — O espaçamento entre itens do menu executivo é 15% maior que o atual. | Conferir o token ou cálculo aplicado e avaliar a distância no exemplo executivo. | A implementar e validar. | Não verificado |
+| CA-02 — Clicar em “Sobre mim” não mostra sombra decorativa e o foco de teclado continua visível. | Conferir hover, clique, estado ativo e foco via teclado no exemplo. | A implementar e validar. | Não verificado |
+
+- Conclusão: Cadastrada; não iniciar até solicitação do usuário e cumprimento das dependências.
 
 
 ## Rodada atual de ajustes — aguardando avaliação

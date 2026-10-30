@@ -4,6 +4,8 @@
   superfície derivadas de tokens (TASK-009).
 * O projeto orienta a gravação de arquivos de texto em UTF-8 e corrige o locale
   POSIX incompatível herdado pelo R no Windows.
+* `navbar()` oferece um controle Light/Dark no designer executivo, com paleta
+  escura baseada nas cores informadas pelo usuário (TASK-011).
 * `navbar()` posiciona o contato junto ao título e desenha uma curva discreta
   de dados no cabeçalho executivo (TASK-007).
 * O exemplo executivo deixa os menus sem ícones e aproxima as setas dos nomes

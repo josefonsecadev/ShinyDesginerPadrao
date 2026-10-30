@@ -135,6 +135,7 @@ navbar <- function(
   }
 
   if (length(right_items) > 0 ||
+      identical(designer_name, "executivo") ||
       (isTRUE(contact) && !identical(designer_name, "executivo"))) {
     navbar_items <- c(
       navbar_items,
@@ -145,6 +146,13 @@ navbar <- function(
       navbar_items <- c(
         navbar_items,
         unname(lapply(as_nav_list(right_items), bslib::nav_item))
+      )
+    }
+
+    if (identical(designer_name, "executivo")) {
+      navbar_items <- c(
+        navbar_items,
+        list(bslib::nav_item(sdp_theme_toggle_ui()))
       )
     }
 

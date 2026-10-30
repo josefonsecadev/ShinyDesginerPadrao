@@ -5,6 +5,7 @@
   --sdp-cor-superficie-pagina: var(--bs-body-bg, #f8fafc);
   --sdp-cor-superficie-elevada: var(--bs-tertiary-bg, #ffffff);
   --sdp-cor-texto-principal: var(--bs-body-color, #0f172a);
+  --sdp-cor-texto-inverso: #ffffff;
   --sdp-cor-texto-secundario: var(--bs-secondary-color, #334155);
   --sdp-cor-borda-padrao: var(--bs-border-color, #cbd5e1);
   --sdp-cor-sombra-superficie: #0f172a;
@@ -125,6 +126,89 @@
   --sdp-tema-navbar-cor-item-ativo: var(--bs-warning);
   --sdp-tema-contato-cor-acento: var(--bs-primary);
   --sdp-tema-contato-cor-acento-secundario: var(--bs-warning);
+}
+
+[data-sdp-color-mode=dark] {
+  --sdp-tema-modo-escuro-cor-ink: #101D39;
+  --sdp-tema-modo-escuro-cor-navy: #1B4D9B;
+  --sdp-tema-modo-escuro-cor-navy-profundo: #0A1B3D;
+  --sdp-tema-modo-escuro-cor-texto: var(--sdp-cor-texto-inverso);
+  --sdp-tema-modo-escuro-cor-texto-ativo: color-mix(
+    in srgb,
+    var(--sdp-tema-modo-escuro-cor-navy) 52%,
+    var(--sdp-tema-modo-escuro-cor-texto)
+  );
+  --sdp-tema-modo-escuro-cor-borda: color-mix(
+    in srgb,
+    var(--sdp-tema-modo-escuro-cor-texto) 28%,
+    transparent
+  );
+  --sdp-tema-modo-escuro-cor-texto-ativo-rgb: 133, 160, 202;
+  --sdp-cor-acao-principal: var(--sdp-tema-modo-escuro-cor-navy);
+  --sdp-cor-acao-secundaria: var(--sdp-tema-modo-escuro-cor-navy-profundo);
+  --sdp-cor-superficie-pagina: var(--sdp-tema-modo-escuro-cor-ink);
+  --sdp-cor-superficie-elevada: var(--sdp-tema-modo-escuro-cor-navy-profundo);
+  --sdp-cor-texto-principal: var(--sdp-tema-modo-escuro-cor-texto);
+  --sdp-cor-texto-secundario: color-mix(
+    in srgb,
+    var(--sdp-tema-modo-escuro-cor-texto) 78%,
+    transparent
+  );
+  --sdp-cor-borda-padrao: var(--sdp-tema-modo-escuro-cor-borda);
+  --sdp-cor-foco: var(--sdp-tema-modo-escuro-cor-texto-ativo);
+  --bs-body-bg: var(--sdp-tema-modo-escuro-cor-ink);
+  --bs-body-bg-rgb: 16, 29, 57;
+  --bs-body-color: var(--sdp-tema-modo-escuro-cor-texto);
+  --bs-body-color-rgb: 248, 250, 252;
+  --bs-emphasis-color: var(--sdp-tema-modo-escuro-cor-texto);
+  --bs-emphasis-color-rgb: 248, 250, 252;
+  --bs-secondary-color: var(--sdp-cor-texto-secundario);
+  --bs-secondary-color-rgb: 194, 195, 196;
+  --bs-secondary-bg: var(--sdp-tema-modo-escuro-cor-navy-profundo);
+  --bs-tertiary-bg: var(--sdp-tema-modo-escuro-cor-navy-profundo);
+  --bs-border-color: var(--sdp-tema-modo-escuro-cor-borda);
+  --bs-primary: var(--sdp-tema-modo-escuro-cor-navy);
+  --bs-primary-rgb: 27, 77, 155;
+  --bs-link-color: var(--sdp-tema-modo-escuro-cor-texto-ativo);
+  --bs-link-color-rgb: var(--sdp-tema-modo-escuro-cor-texto-ativo-rgb);
+  --bs-link-hover-color: var(--sdp-tema-modo-escuro-cor-texto);
+  --bs-link-hover-color-rgb: 248, 250, 252;
+  --bs-primary-bg-subtle: color-mix(
+    in srgb,
+    var(--sdp-tema-modo-escuro-cor-navy) 24%,
+    var(--sdp-tema-modo-escuro-cor-ink)
+  );
+  --bs-primary-text-emphasis: var(--sdp-tema-modo-escuro-cor-texto-ativo);
+  --bs-primary-border-subtle: var(--sdp-tema-modo-escuro-cor-navy);
+}
+
+[data-sdp-color-mode=dark] .sdp-navbar[data-sdp-designer=executivo] {
+  --sdp-tema-navbar-cor-fundo: var(--sdp-tema-modo-escuro-cor-navy-profundo);
+  --sdp-tema-navbar-cor-texto: var(--sdp-tema-modo-escuro-cor-texto);
+  --sdp-tema-navbar-cor-ativo: var(--sdp-tema-modo-escuro-cor-texto-ativo);
+  --sdp-tema-navbar-cor-item-ativo: var(--sdp-tema-modo-escuro-cor-texto-ativo);
+  --sdp-tema-navbar-cor-borda: var(--sdp-tema-modo-escuro-cor-borda);
+  --sdp-tema-navbar-cor-submenu-fundo: var(--sdp-tema-modo-escuro-cor-navy-profundo);
+  --sdp-tema-navbar-cor-submenu-texto: var(--sdp-tema-modo-escuro-cor-texto);
+  --sdp-tema-navbar-cor-submenu-ativo: var(--sdp-tema-modo-escuro-cor-texto-ativo);
+  --sdp-tema-navbar-cor-submenu-destaque-fundo: color-mix(
+    in srgb,
+    var(--sdp-tema-modo-escuro-cor-navy-profundo) 82%,
+    var(--sdp-tema-modo-escuro-cor-navy)
+  );
+  --sdp-tema-navbar-cor-submenu-destaque-descricao: var(--sdp-tema-modo-escuro-cor-texto);
+  --sdp-tema-navbar-cor-submenu-texto-secundario: var(--sdp-cor-texto-secundario);
+  --sdp-tema-navbar-cor-texto-secundario: var(--sdp-cor-texto-secundario);
+  --sdp-tema-navbar-sombra: none;
+  --sdp-tema-navbar-cor-dados: color-mix(
+    in srgb,
+    var(--sdp-tema-modo-escuro-cor-navy) 22%,
+    transparent
+  );
+}
+
+[data-sdp-color-mode=dark] .sdp-footer[data-sdp-designer=executivo] {
+  --sdp-tema-navbar-cor-fundo: var(--sdp-tema-modo-escuro-cor-navy-profundo);
 }
 
 .sdp-navbar {
@@ -690,6 +774,60 @@
   background-color: var(--sdp-footer-cor-fundo);
 }
 
+.sdp-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sdp-espaco-2);
+  height: var(--sdp-navbar-item-altura);
+  padding: 0 var(--sdp-espaco-3);
+  border: 0;
+  border-radius: var(--sdp-navbar-raio-item);
+  background-color: transparent;
+  color: var(--sdp-navbar-cor-texto);
+  font-family: var(--sdp-tipografia-familia-base);
+  font-size: calc(var(--sdp-tipografia-tamanho-base) * 0.875);
+  font-weight: var(--sdp-tipografia-peso-controle);
+  line-height: var(--sdp-tipografia-altura-linha-base);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.sdp-theme-toggle:hover {
+  background-color: transparent;
+  color: var(--sdp-navbar-cor-item-ativo);
+}
+
+.sdp-theme-toggle:focus-visible {
+  outline: 0.15rem solid var(--sdp-cor-foco);
+  outline-offset: 0.1rem;
+}
+
+.sdp-theme-toggle__icon {
+  flex: 0 0 auto;
+}
+
+.sdp-theme-toggle__icon--dark {
+  display: none;
+}
+
+.sdp-theme-toggle[data-sdp-theme-mode=dark] .sdp-theme-toggle__icon--light {
+  display: none;
+}
+
+.sdp-theme-toggle[data-sdp-theme-mode=dark] .sdp-theme-toggle__icon--dark {
+  display: block;
+}
+
+.sdp-navbar .navbar-nav .sdp-theme-toggle {
+  align-self: center;
+}
+
+@media (max-width: 768px) {
+  .sdp-navbar .navbar-nav .sdp-theme-toggle {
+    width: max-content;
+    margin-block: var(--sdp-espaco-1);
+  }
+}
 .sdp-contato {
   --sdp-contato-cor-fundo: var(--sdp-cor-superficie-elevada);
   --sdp-contato-cor-texto: var(--sdp-cor-texto-principal);

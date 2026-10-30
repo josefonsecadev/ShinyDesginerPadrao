@@ -6,6 +6,7 @@
   --sdp-cor-superficie-pagina: var(--bs-body-bg, #{$sdp-cor-cinza-050});
   --sdp-cor-superficie-elevada: var(--bs-tertiary-bg, #{$sdp-cor-branco});
   --sdp-cor-texto-principal: var(--bs-body-color, #{$sdp-cor-cinza-900});
+  --sdp-cor-texto-inverso: #{$sdp-cor-branco};
   --sdp-cor-texto-secundario: var(--bs-secondary-color, #{$sdp-cor-cinza-700});
   --sdp-cor-borda-padrao: var(--bs-border-color, #{$sdp-cor-cinza-300});
   --sdp-cor-sombra-superficie: #{$sdp-cor-cinza-900};
@@ -126,4 +127,87 @@
   --sdp-tema-navbar-cor-item-ativo: var(--bs-warning);
   --sdp-tema-contato-cor-acento: var(--bs-primary);
   --sdp-tema-contato-cor-acento-secundario: var(--bs-warning);
+}
+
+[data-sdp-color-mode="dark"] {
+  --sdp-tema-modo-escuro-cor-ink: #101D39;
+  --sdp-tema-modo-escuro-cor-navy: #1B4D9B;
+  --sdp-tema-modo-escuro-cor-navy-profundo: #0A1B3D;
+  --sdp-tema-modo-escuro-cor-texto: var(--sdp-cor-texto-inverso);
+  --sdp-tema-modo-escuro-cor-texto-ativo: color-mix(
+    in srgb,
+    var(--sdp-tema-modo-escuro-cor-navy) 52%,
+    var(--sdp-tema-modo-escuro-cor-texto)
+  );
+  --sdp-tema-modo-escuro-cor-borda: color-mix(
+    in srgb,
+    var(--sdp-tema-modo-escuro-cor-texto) 28%,
+    transparent
+  );
+  --sdp-tema-modo-escuro-cor-texto-ativo-rgb: 133, 160, 202;
+  --sdp-cor-acao-principal: var(--sdp-tema-modo-escuro-cor-navy);
+  --sdp-cor-acao-secundaria: var(--sdp-tema-modo-escuro-cor-navy-profundo);
+  --sdp-cor-superficie-pagina: var(--sdp-tema-modo-escuro-cor-ink);
+  --sdp-cor-superficie-elevada: var(--sdp-tema-modo-escuro-cor-navy-profundo);
+  --sdp-cor-texto-principal: var(--sdp-tema-modo-escuro-cor-texto);
+  --sdp-cor-texto-secundario: color-mix(
+    in srgb,
+    var(--sdp-tema-modo-escuro-cor-texto) 78%,
+    transparent
+  );
+  --sdp-cor-borda-padrao: var(--sdp-tema-modo-escuro-cor-borda);
+  --sdp-cor-foco: var(--sdp-tema-modo-escuro-cor-texto-ativo);
+  --bs-body-bg: var(--sdp-tema-modo-escuro-cor-ink);
+  --bs-body-bg-rgb: 16, 29, 57;
+  --bs-body-color: var(--sdp-tema-modo-escuro-cor-texto);
+  --bs-body-color-rgb: 248, 250, 252;
+  --bs-emphasis-color: var(--sdp-tema-modo-escuro-cor-texto);
+  --bs-emphasis-color-rgb: 248, 250, 252;
+  --bs-secondary-color: var(--sdp-cor-texto-secundario);
+  --bs-secondary-color-rgb: 194, 195, 196;
+  --bs-secondary-bg: var(--sdp-tema-modo-escuro-cor-navy-profundo);
+  --bs-tertiary-bg: var(--sdp-tema-modo-escuro-cor-navy-profundo);
+  --bs-border-color: var(--sdp-tema-modo-escuro-cor-borda);
+  --bs-primary: var(--sdp-tema-modo-escuro-cor-navy);
+  --bs-primary-rgb: 27, 77, 155;
+  --bs-link-color: var(--sdp-tema-modo-escuro-cor-texto-ativo);
+  --bs-link-color-rgb: var(--sdp-tema-modo-escuro-cor-texto-ativo-rgb);
+  --bs-link-hover-color: var(--sdp-tema-modo-escuro-cor-texto);
+  --bs-link-hover-color-rgb: 248, 250, 252;
+  --bs-primary-bg-subtle: color-mix(
+    in srgb,
+    var(--sdp-tema-modo-escuro-cor-navy) 24%,
+    var(--sdp-tema-modo-escuro-cor-ink)
+  );
+  --bs-primary-text-emphasis: var(--sdp-tema-modo-escuro-cor-texto-ativo);
+  --bs-primary-border-subtle: var(--sdp-tema-modo-escuro-cor-navy);
+}
+
+[data-sdp-color-mode="dark"] .sdp-navbar[data-sdp-designer="executivo"] {
+  --sdp-tema-navbar-cor-fundo: var(--sdp-tema-modo-escuro-cor-navy-profundo);
+  --sdp-tema-navbar-cor-texto: var(--sdp-tema-modo-escuro-cor-texto);
+  --sdp-tema-navbar-cor-ativo: var(--sdp-tema-modo-escuro-cor-texto-ativo);
+  --sdp-tema-navbar-cor-item-ativo: var(--sdp-tema-modo-escuro-cor-texto-ativo);
+  --sdp-tema-navbar-cor-borda: var(--sdp-tema-modo-escuro-cor-borda);
+  --sdp-tema-navbar-cor-submenu-fundo: var(--sdp-tema-modo-escuro-cor-navy-profundo);
+  --sdp-tema-navbar-cor-submenu-texto: var(--sdp-tema-modo-escuro-cor-texto);
+  --sdp-tema-navbar-cor-submenu-ativo: var(--sdp-tema-modo-escuro-cor-texto-ativo);
+  --sdp-tema-navbar-cor-submenu-destaque-fundo: color-mix(
+    in srgb,
+    var(--sdp-tema-modo-escuro-cor-navy-profundo) 82%,
+    var(--sdp-tema-modo-escuro-cor-navy)
+  );
+  --sdp-tema-navbar-cor-submenu-destaque-descricao: var(--sdp-tema-modo-escuro-cor-texto);
+  --sdp-tema-navbar-cor-submenu-texto-secundario: var(--sdp-cor-texto-secundario);
+  --sdp-tema-navbar-cor-texto-secundario: var(--sdp-cor-texto-secundario);
+  --sdp-tema-navbar-sombra: none;
+  --sdp-tema-navbar-cor-dados: color-mix(
+    in srgb,
+    var(--sdp-tema-modo-escuro-cor-navy) 22%,
+    transparent
+  );
+}
+
+[data-sdp-color-mode="dark"] .sdp-footer[data-sdp-designer="executivo"] {
+  --sdp-tema-navbar-cor-fundo: var(--sdp-tema-modo-escuro-cor-navy-profundo);
 }

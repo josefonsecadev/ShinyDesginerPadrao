@@ -93,4 +93,43 @@
       dropdown.classList.remove("sdp-navbar__dropdown--fechado");
     }
   }, true);
+
+  document.addEventListener("click", function (event) {
+    if (!event.target || typeof event.target.closest !== "function") {
+      return;
+    }
+
+    var button = event.target.closest(
+      ".sdp-theme-toggle[data-sdp-theme-mode]"
+    );
+
+    if (!button) {
+      return;
+    }
+
+    var currentMode = button.getAttribute("data-sdp-theme-mode");
+    var page = button.closest(".bslib-page-navbar");
+
+    if (!page || (currentMode !== "light" && currentMode !== "dark")) {
+      return;
+    }
+
+    var mode = currentMode === "light" ? "dark" : "light";
+
+    page.setAttribute("data-sdp-color-mode", mode);
+    page.setAttribute("data-bs-theme", mode);
+    button.setAttribute("data-sdp-theme-mode", mode);
+    button.setAttribute("aria-pressed", mode === "dark" ? "true" : "false");
+
+    var label = button.querySelector(".sdp-theme-toggle__label");
+    if (label) {
+      label.textContent = mode === "dark" ? "Dark" : "Light";
+    }
+
+    var themeElements = page.querySelectorAll("[data-bs-theme]");
+    for (var index = 0; index < themeElements.length; index += 1) {
+      themeElements[index].setAttribute("data-bs-theme", mode);
+    }
+
+  });
 })();
