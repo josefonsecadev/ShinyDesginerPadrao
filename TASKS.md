@@ -544,7 +544,7 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 
 ### TASK-014 — Refinar espaçamento do menu e sombra do contato
 
-- Estado: Aprovada — envio pendente
+- Estado: Concluída
 - Categoria principal: Design
 - Categorias secundárias: UI / Componentes, CSS
 - Esforço: Baixo
@@ -561,8 +561,8 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 - URL de avaliação: http://127.0.0.1:3878/ — servidor R ativo, designer executivo. Execução: `Rscript -e "pkgload::load_all('.'); shiny::runApp('examples/exemplo_executivo.R', host = '127.0.0.1', port = 3878, launch.browser = FALSE)"`
 - Validação do usuário: dispensada; aprovação automática autorizada em 30/10/2026
 - Aprovação da task: explícita para execução automática em 30/10/2026
-- Entrega Git: commit e push desta task em execução
-- Commit e destino: pendente
+- Entrega Git: commit e push concluídos
+- Commit e destino: `5652c9b` em `origin/master`
 
 #### Critérios de aceite e análise de cumprimento
 
@@ -576,7 +576,7 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 
 ### TASK-015 — Enriquecer o fundo decorativo do cabeçalho executivo
 
-- Estado: Cadastrada
+- Estado: Aprovada — envio pendente
 - Categoria principal: Design
 - Categorias secundárias: UI / Componentes, CSS, Acessibilidade
 - Esforço: Baixo
@@ -588,23 +588,23 @@ O commit inclui o registro de aprovação e aceite. O hash do próprio commit e 
 - Referência: designer `executivo`, `examples/exemplo_executivo.R`; o cabeçalho já contém uma curva de dados SVG.
 - Resultado esperado: fundo visualmente mais rico, com elementos SVG decorativos de inspiração trigonométrica, sem competir com título, navegação, contato ou alternador de tema; comportamento consistente em temas claro e escuro e em telas estreitas.
 - Dependências: TASK-007 para a composição atual do cabeçalho; TASK-013 para preservar a legibilidade do título.
-- Resultado e arquivos alterados: tarefa cadastrada; nenhuma implementação iniciada.
-- Verificações e pendências: avaliar composição e legibilidade no exemplo executivo; verificar escala responsiva, modo claro/escuro, `aria-hidden`, ausência de interação e de bloqueio dos controles.
-- URL de avaliação: não aplicável até a execução
-- Validação do usuário: pendente
-- Aprovação da task: pendente
-- Entrega Git: pendente de implementação, aceite e aprovação explícita
+- Resultado e arquivos alterados: `R/navbar.R` amplia o SVG decorativo executivo com ondas, laços, guias e pontos; tokens e SCSS mantêm opacidade baixa, cores por tema e decoração sem interação. CSS compilado em `inst/www/css/shiny-designer-padrao.css`; `NEWS.md` atualizado.
+- Verificações e pendências: compilação Sass via `npx sass` e `git diff --check` passaram; requisições ao exemplo e ao CSS responderam HTTP 200 e o markup servido contém as camadas decorativas com `aria-hidden`. O pacote R não tem `sass` nem `pkgload` instalados, então a compilação e smoke test pelo R não estão disponíveis. Validação visual dispensada pelo usuário em 30/10/2026.
+- URL de avaliação: http://127.0.0.1:3878/ — servidor R ativo, designer executivo. Execução: `Rscript -e "pkgload::load_all('.'); shiny::runApp('examples/exemplo_executivo.R', host = '127.0.0.1', port = 3878, launch.browser = FALSE)"`
+- Validação do usuário: dispensada; aprovação automática autorizada em 30/10/2026
+- Aprovação da task: automática conforme autorização do usuário em 30/10/2026
+- Entrega Git: implementação concluída; commit/push desta tarefa em execução
 - Commit e destino: pendente
 
 #### Critérios de aceite e análise de cumprimento
 
 | Critério / resultado esperado | Plano de verificação | Evidência e resultado | Situação |
 | --- | --- | --- | --- |
-| CA-01 — O cabeçalho contém mais elementos SVG de inspiração trigonométrica e aparência mais maximalista, apenas como preenchimento. | Avaliar a composição no cabeçalho executivo em repouso. | A implementar e validar. | Não verificado |
-| CA-02 — A decoração não encobre nem compete com título, menus, contato ou controle de tema. | Conferir hierarquia e legibilidade no exemplo executivo. | A implementar e validar. | Não verificado |
-| CA-03 — A decoração é semântica e interativamente neutra, com adaptação a temas e telas estreitas. | Verificar `aria-hidden`, `pointer-events`, cores via tokens e quebra responsiva em modos claro e escuro. | A implementar e validar. | Não verificado |
+| CA-01 — O cabeçalho contém mais elementos SVG de inspiração trigonométrica e aparência mais maximalista, apenas como preenchimento. | Conferir as camadas decorativas SVG no markup. | Ondas secundária e de acento, laços, guias e pontos presentes no SVG do designer executivo; marcador semântico `aria-hidden="true"`. Validação visual dispensada pelo usuário. | Atendido |
+| CA-02 — A decoração não encobre nem compete com título, menus, contato ou controle de tema. | Conferir o posicionamento e a opacidade no CSS. | SVG absoluto e não interativo, com as camadas em opacidade reduzida por tokens; o conteúdo da navegação permanece em camada superior. Validação visual dispensada pelo usuário. | Atendido |
+| CA-03 — A decoração é semântica e interativamente neutra, com adaptação a temas e telas estreitas. | Verificar `aria-hidden`, `pointer-events`, cores via tokens e escala responsiva em modos claro e escuro. | `aria-hidden="true"`, `pointer-events: none`, cores e opacidades via tokens para claro/escuro e `preserveAspectRatio="none"`; página e CSS responderam HTTP 200. Validação visual dispensada pelo usuário. | Atendido |
 
-- Conclusão: Cadastrada; aguardar a execução da sequência e solicitação do usuário.
+- Conclusão: Critérios técnicos atendidos; validação visual dispensada e aprovação automática autorizada pelo usuário. Commit e push pendentes.
 
 
 ### TASK-016 — Adicionar linha divisória entre a página e o rodapé

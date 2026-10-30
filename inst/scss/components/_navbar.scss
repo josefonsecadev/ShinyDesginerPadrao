@@ -457,6 +457,33 @@
   stroke-width: var(--sdp-navbar-borda-largura);
 }
 
+.sdp-navbar[data-sdp-designer="executivo"] .sdp-navbar__data-wave--secondary {
+  opacity: var(--sdp-navbar-dados-opacidade-secundaria);
+}
+
+.sdp-navbar[data-sdp-designer="executivo"] .sdp-navbar__data-wave--accent,
+.sdp-navbar[data-sdp-designer="executivo"] .sdp-navbar__data-point--accent {
+  color: var(--sdp-tema-navbar-cor-dados-acento);
+}
+
+.sdp-navbar[data-sdp-designer="executivo"] .sdp-navbar__data-wave--accent {
+  opacity: var(--sdp-navbar-dados-opacidade-secundaria);
+}
+
+.sdp-navbar[data-sdp-designer="executivo"] .sdp-navbar__data-loop {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: var(--sdp-navbar-dados-largura-destaque);
+  opacity: var(--sdp-navbar-dados-opacidade-secundaria);
+}
+
+.sdp-navbar[data-sdp-designer="executivo"] .sdp-navbar__data-guide {
+  stroke: currentColor;
+  stroke-width: var(--sdp-navbar-borda-largura);
+  stroke-dasharray: var(--sdp-espaco-1) var(--sdp-espaco-2);
+  opacity: var(--sdp-navbar-dados-opacidade-guia);
+}
+
 .sdp-navbar[data-sdp-designer="executivo"] .sdp-navbar__data-point {
   r: var(--sdp-espaco-1);
   fill: currentColor;

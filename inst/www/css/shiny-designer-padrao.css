@@ -53,6 +53,11 @@
   --sdp-tema-navbar-cor-fundo: color-mix(in srgb, var(--bs-body-bg) 96%, var(--bs-body-color));
   --sdp-tema-navbar-cor-texto: var(--bs-body-color);
   --sdp-tema-navbar-cor-ativo: var(--bs-warning);
+  --sdp-tema-navbar-cor-dados: color-mix(in srgb, var(--bs-primary) 14%, transparent);
+  --sdp-tema-navbar-cor-dados-acento: color-mix(in srgb, var(--bs-warning) 16%, transparent);
+  --sdp-navbar-dados-opacidade-secundaria: 0.56;
+  --sdp-navbar-dados-opacidade-guia: 0.42;
+  --sdp-navbar-dados-largura-destaque: calc(var(--sdp-navbar-borda-largura) * 1.5);
   --sdp-tema-navbar-cor-borda: color-mix(in srgb, var(--bs-body-bg) 80%, var(--bs-body-color));
   --sdp-tema-navbar-cor-faixa: var(--bs-warning);
   --sdp-tema-navbar-faixa-altura: var(--sdp-espaco-0);
@@ -209,7 +214,12 @@
   --sdp-tema-navbar-sombra: none;
   --sdp-tema-navbar-cor-dados: color-mix(
     in srgb,
-    var(--sdp-tema-modo-escuro-cor-navy) 22%,
+    var(--sdp-tema-modo-escuro-cor-navy) 30%,
+    transparent
+  );
+  --sdp-tema-navbar-cor-dados-acento: color-mix(
+    in srgb,
+    var(--sdp-tema-modo-escuro-cor-texto-ativo) 24%,
     transparent
   );
 }
@@ -668,6 +678,33 @@
   fill: none;
   stroke: currentColor;
   stroke-width: var(--sdp-navbar-borda-largura);
+}
+
+.sdp-navbar[data-sdp-designer=executivo] .sdp-navbar__data-wave--secondary {
+  opacity: var(--sdp-navbar-dados-opacidade-secundaria);
+}
+
+.sdp-navbar[data-sdp-designer=executivo] .sdp-navbar__data-wave--accent,
+.sdp-navbar[data-sdp-designer=executivo] .sdp-navbar__data-point--accent {
+  color: var(--sdp-tema-navbar-cor-dados-acento);
+}
+
+.sdp-navbar[data-sdp-designer=executivo] .sdp-navbar__data-wave--accent {
+  opacity: var(--sdp-navbar-dados-opacidade-secundaria);
+}
+
+.sdp-navbar[data-sdp-designer=executivo] .sdp-navbar__data-loop {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: var(--sdp-navbar-dados-largura-destaque);
+  opacity: var(--sdp-navbar-dados-opacidade-secundaria);
+}
+
+.sdp-navbar[data-sdp-designer=executivo] .sdp-navbar__data-guide {
+  stroke: currentColor;
+  stroke-width: var(--sdp-navbar-borda-largura);
+  stroke-dasharray: var(--sdp-espaco-1) var(--sdp-espaco-2);
+  opacity: var(--sdp-navbar-dados-opacidade-guia);
 }
 
 .sdp-navbar[data-sdp-designer=executivo] .sdp-navbar__data-point {

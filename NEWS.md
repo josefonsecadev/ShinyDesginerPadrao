@@ -10,6 +10,9 @@
 * `navbar()` aumenta em 15% o espaço entre itens do menu executivo e remove a
   sombra de foco do mouse no botão “Sobre mim”, mantendo contorno de teclado
   visível (TASK-014).
+* `navbar()` adiciona ondas, órbitas, guias e nós SVG decorativos de inspiração
+  trigonométrica ao cabeçalho executivo, adaptados aos modos claro e escuro
+  (TASK-015).
 * O projeto orienta a gravação de arquivos de texto em UTF-8 e corrige o locale
   POSIX incompatível herdado pelo R no Windows.
 * `navbar()` oferece um controle Light/Dark no designer executivo, com paleta

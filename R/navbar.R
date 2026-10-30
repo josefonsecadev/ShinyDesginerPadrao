@@ -115,10 +115,32 @@ navbar <- function(
         class = "sdp-navbar__data-wave",
         d = "M0 44 C80 8 160 8 240 44 S400 80 480 44 S640 8 720 44 S880 80 960 44"
       ),
+      shiny::tags$path(
+        class = "sdp-navbar__data-wave sdp-navbar__data-wave--secondary",
+        d = "M0 25 C32 7 64 7 96 25 S160 43 192 25 S256 7 288 25 S352 43 384 25 S448 7 480 25 S544 43 576 25 S640 7 672 25 S736 43 768 25 S832 7 864 25 S928 43 960 25"
+      ),
+      shiny::tags$path(
+        class = "sdp-navbar__data-wave sdp-navbar__data-wave--accent",
+        d = "M0 64 C48 40 96 40 144 64 S240 88 288 64 S384 40 432 64 S528 88 576 64 S672 40 720 64 S816 88 864 64 S912 52 960 64"
+      ),
+      shiny::tags$path(
+        class = "sdp-navbar__data-loop",
+        d = "M104 44 C104 19 152 19 152 44 C152 69 104 69 104 44 Z M296 44 C296 19 344 19 344 44 C344 69 296 69 296 44 Z M488 44 C488 19 536 19 536 44 C536 69 488 69 488 44 Z M680 44 C680 19 728 19 728 44 C728 69 680 69 680 44 Z M872 44 C872 19 920 19 920 44 C920 69 872 69 872 44 Z"
+      ),
+      shiny::tags$line(class = "sdp-navbar__data-guide", x1 = "80", y1 = "8", x2 = "80", y2 = "80"),
+      shiny::tags$line(class = "sdp-navbar__data-guide", x1 = "240", y1 = "8", x2 = "240", y2 = "80"),
+      shiny::tags$line(class = "sdp-navbar__data-guide", x1 = "400", y1 = "8", x2 = "400", y2 = "80"),
+      shiny::tags$line(class = "sdp-navbar__data-guide", x1 = "560", y1 = "8", x2 = "560", y2 = "80"),
+      shiny::tags$line(class = "sdp-navbar__data-guide", x1 = "720", y1 = "8", x2 = "720", y2 = "80"),
+      shiny::tags$line(class = "sdp-navbar__data-guide", x1 = "880", y1 = "8", x2 = "880", y2 = "80"),
       shiny::tags$circle(class = "sdp-navbar__data-point", cx = "120", cy = "17"),
+      shiny::tags$circle(class = "sdp-navbar__data-point sdp-navbar__data-point--accent", cx = "192", cy = "25"),
       shiny::tags$circle(class = "sdp-navbar__data-point", cx = "360", cy = "71"),
+      shiny::tags$circle(class = "sdp-navbar__data-point sdp-navbar__data-point--accent", cx = "432", cy = "64"),
       shiny::tags$circle(class = "sdp-navbar__data-point", cx = "600", cy = "17"),
-      shiny::tags$circle(class = "sdp-navbar__data-point", cx = "840", cy = "71")
+      shiny::tags$circle(class = "sdp-navbar__data-point sdp-navbar__data-point--accent", cx = "672", cy = "25"),
+      shiny::tags$circle(class = "sdp-navbar__data-point", cx = "840", cy = "71"),
+      shiny::tags$circle(class = "sdp-navbar__data-point sdp-navbar__data-point--accent", cx = "912", cy = "52")
     )
   }
 
